@@ -15,9 +15,9 @@ a first dump is at the top of the page
 https://dumps.wikimedia.org/other/pageview_complete/
 
 - 3 files per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageview_complete/2021/2021-01/):
-    - ```pageviews-20210101-automated.bz2``` (~100MB compressed (bz2), **~500MB uncompressed**)
-    - ```pageviews-20210101-spider.bz2``` (~1GB compressed (bz2))
-    - ```pageviews-20210101-user.bz2``` (~500MB compressed (bz2))
+    - `pageviews-20210101-automated.bz2` (~100MB compressed (bz2), **~500MB uncompressed**)
+    - `pageviews-20210101-spider.bz2` (~1GB compressed (bz2))
+    - `pageviews-20210101-user.bz2` (~500MB compressed (bz2))
 
 - Notes:
     - download speed seems to be throttled a lot, took over few minutes to download the 1GB file (~2-3MB/s) despite being on a 300 mbit network (so ~35+MB/s possible)
@@ -42,7 +42,7 @@ https://dumps.wikimedia.org/other/pageviews/
 
 - [Documentation](https://meta.wikimedia.org/wiki/Research:Page_view)
 - 2 files per hour, so 48 per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageviews/2021/2021-01/):
-    - ```pageviews-20210101-000000.gz``` (~00:30-01:30) (~40MB compressed (gz), **~150MB uncompressed**)
+    - `pageviews-20210101-000000.gz` (~00:30-01:30) (~40MB compressed (gz), **~150MB uncompressed**)
     - `projectviews-20210101-000000` (~00:30-01:30) (19KB uncompressed)
 
 - Notes:
@@ -52,7 +52,7 @@ https://dumps.wikimedia.org/other/pageviews/
 
 ### Dump 3
 
-On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Research:Page_view#Data_sources_that_use_this_definition) links to a [Hive database with page data](Analytics/Data Lake/Traffic/Pageview hourly)
+On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Research:Page_view#Data_sources_that_use_this_definition) links to a [Hive database with page data](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageview_hourly)
 - uses the schema described on the Research:Page view page exactly
 - **stored in Parquet forma**
 - **However not publicly accessible as of 2018**
@@ -60,7 +60,7 @@ On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Rese
 
 ## Files
 
-### Dump 1 ```pageviews-[YYYYMMDD]-automated```
+### Dump 1 `pageviews-[YYYYMMDD]-automated`
 
 ```
 aa.wikibooks Main_Page null desktop 8 F8
@@ -80,7 +80,7 @@ ab.wikipedia Ашаблон:Абираҟдырга/Польша 3947 desktop 1 M
 - 90MB compressed (bz2)
 - 500MB uncompressed
 
-### Dump 1 ```pageviews-[YYYYMMDD]-user```
+### Dump 1 `pageviews-[YYYYMMDD]-user`
 
 ```
 aa.wikibooks - null mobile-web 4 I1O2R1
@@ -100,7 +100,7 @@ aa.wikibooks Special:UserLogin null desktop 36 A2B1C2F2G2H4I2J1K1L2N1O1R4T1U3V2W
 - 500MB compressed (bz2)
 - 2.3GB uncompressed
 
-### Dump 1 ```pageviews-[YYYYMMDD]-spider```
+### Dump 1 `pageviews-[YYYYMMDD]-spider`
 
 ```
 aa.wikibooks File:14-02-05-straszburg-RalfR-010.jpg null mobile-web 1 P1
@@ -120,7 +120,7 @@ aa.wikibooks File:Wikisource-logo.svg null desktop 2 C1D1
 - 1GB compressed (bz2)
 - 5.3 GB uncompressed
 
-### Dump 2 ```pageviews-[YYYYMMDD]-[HHMMSS]```
+### Dump 2 `pageviews-[YYYYMMDD]-[HHMMSS]`
 
 ```
 aa - 3 0
@@ -136,10 +136,10 @@ aa.m.b User:Sir_Lestaty_de_Lioncourt 1 0
 ```
 
 - 4 columns, [Explanation](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews):
-    - ```domain_code1```: abbreviated domain of the request
-    - ```page_title```: "title of the unnormalized part after /wiki/"
-    - ```count_views```: number of page views in hour
-    - ```total_response_size```: total response size caused by the requests for this page in the respective hour
+    - `domain_code1`: abbreviated domain of the request
+    - `page_title`: "title of the unnormalized part after /wiki/"
+    - `count_views`: number of page views in hour
+    - `total_response_size`: total response size caused by the requests for this page in the respective hour
 
 - Example: ```de.m.voy Berlin 176 314159``` means 176 requests to "de.m.wikivoyage.org/wiki/Berlin", which accounted in total for 314159 response bytes
 - Each domain_code and page_title pair occurs at most once
@@ -151,7 +151,7 @@ aa.m.b User:Sir_Lestaty_de_Lioncourt 1 0
 - 150MB uncompressed
 
 
-### Dump 2 ```projectviews-[YYYYMMDD]-[HHMMSS]```
+### Dump 2 `projectviews-[YYYYMMDD]-[HHMMSS]`
 
 ```
 aa - 3 0
