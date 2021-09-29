@@ -158,7 +158,8 @@ aa.m.b User:Sir_Lestaty_de_Lioncourt 1 0
 - Each domain_code and page_title pair occurs at most once
 - The file is sorted by domain_code and page_title. Same Source
 - there is a similar dataset that has been depreceated by now. [More Info](https://wikitech.wikimedia.org/wiki/Analytics/Archive/Data/Pagecounts-raw). Not the same as Dump1)
-- Relevant to our Project! **It filters out as many spiders and bots as we can detect**
+- Relevant to our Project:
+    - > It filters out as many spiders and bots as we can detect
 - 4,855,510 lines
 - 40MB compressed (gz)
 - 150MB uncompressed
