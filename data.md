@@ -1,5 +1,11 @@
 # Data
 
+We have identified 3 data sources for now.
+
+- [Dump 1](#dump-1)
+- [Dump 2](#dump-2)
+- [Dump 3](#dump-3)
+
 ## Dump 1
 
 ### Location
@@ -159,7 +165,7 @@ ady.m - 7 0
 
 ---
 
-## Dataset (Dump 3)
+## Dump 3
 
 ### Location
 
