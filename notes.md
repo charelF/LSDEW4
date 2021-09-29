@@ -55,8 +55,10 @@ https://dumps.wikimedia.org/other/pageviews/
 On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Research:Page_view#Data_sources_that_use_this_definition) links to a [Hive database with page data](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageview_hourly)
 - uses the schema described on the Research:Page view page exactly
 - **stored in Parquet forma**
-- **However not publicly accessible as of 2018**
+- Contains data from 1 May 2015 until now, **however not publicly accessible as of 2018.** So there are 3 years public and 3 years private
 - but it **links to code that is used to generate this database** (See "See also" section at bottom)
+- more info: https://www.mediawiki.org/wiki/Wikimedia_Product/Data_dictionary/pageviews_hourly
+
 
 ## Files
 
@@ -179,6 +181,12 @@ ady.m - 7 0
 
 - read first 10 lines: ``` head -n10 pageviews-20210101-automated ```
 - count number of lines: ``` cat pageviews-20210101-automated | wc -l ```
+
+### Other useful links
+
+- [Interesting and Relevant Blog post](https://techblog.wikimedia.org/2020/10/05/bot-or-not-identifying-fake-traffic-on-wikipedia/) about identifying traffic types and differences between legitimate and illegitimate traffic. Particularly:
+
+> Up to April 2020, our classification for pageviews included only two types of actors: **“users”** and **“spiders”** (self-identified crawlers like Googlebot). Since all traffic not self-identified as “bot” was identified as “user,” quite a significant percentage of “bot spam” traffic was tagged as “user” traffic. This simple classification distorted our pageview numbers, as it made it seem that there was more user traffic than there really was. For example, we estimated that in 2019 between 5 to 8% of desktop pageviews in English Wikipedia tagged as “user” traffic was actually coming from “bot spammers/vandals.” That number could be as high as 800 pageviews a second. We continue processing and cataloging these requests, and **from April 2020 onwards the traffic we identify as coming from spammers** is tagged with the label **“automated.”** You can see here that it represents about 5% of total traffic. 
 
 
 
