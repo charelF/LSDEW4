@@ -29,9 +29,9 @@ Here we are interested in the last one
 https://dumps.wikimedia.org/other/pageview_complete/
 
 - 3 files per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageview_complete/2021/2021-01/):
-    - ```pageviews-20210101-automated.bz2``` (~100MB)
-    - ```pageviews-20210101-spider.bz2``` (~1GB)
-    - ```pageviews-20210101-user.bz2``` (~500MB)
+    - ```pageviews-20210101-automated.bz2``` (~100MB compressed (bz2), **~500MB uncompressed**)
+    - ```pageviews-20210101-spider.bz2``` (~1GB compressed (bz2))
+    - ```pageviews-20210101-user.bz2``` (~500MB compressed (bz2))
 
 - Notes:
     - download speed seems to be throttled a lot, took over few minutes to download the 1GB file (~2-3MB/s) despite being on a 300 mbit network (so ~35+MB/s possible)
@@ -41,11 +41,15 @@ https://dumps.wikimedia.org/other/pageview_complete/
 
 https://dumps.wikimedia.org/other/pageviews/
 
-- Contains documenation: https://meta.wikimedia.org/wiki/Research:Page_view
+- Contains documentation: https://meta.wikimedia.org/wiki/Research:Page_view
 - 1 file per hour, so 24 per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageviews/2021/2021-01/):
-    - ```pageviews-20210101-000000.gz``` (~00:30-01:30) (~40MB)
-    - ```pageviews-20210101-010000.gz``` (~01:30-02:30) (~40MB)
-    - ...
+    - ```pageviews-20210101-000000.gz``` (~00:30-01:30) (~40MB compressed (gz), **~150MB uncompressed**)
+    - ... same for every hour
+
+- Notes:
+    - download speed seems to be throttled aswell, did not go over (~2-3MB/s)
+    - MacOS seems to uncompress the .bz file immediately after download
+
 
 
 
