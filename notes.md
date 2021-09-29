@@ -2,13 +2,15 @@
 
 2021-09-29
 
-## [Dumps](https://dumps.wikimedia.org/other/pageview_complete/readme.html)
+## Dumps
 
-### Dump 1
+On: https://dumps.wikimedia.org/other/pageview_complete/readme.html
 
 a first dump is at the top of the page
 
 > Maintained by the Wikimedia Analytics team [Link to the dumps](https://dumps.wikimedia.org/other/pageview_complete/)
+
+### Dump 1
 
 https://dumps.wikimedia.org/other/pageview_complete/
 
@@ -20,7 +22,9 @@ https://dumps.wikimedia.org/other/pageview_complete/
 - Notes:
     - download speed seems to be throttled a lot, took over few minutes to download the 1GB file (~2-3MB/s) despite being on a 300 mbit network (so ~35+MB/s possible)
 
-### Dump 2
+---
+
+lower on the page is another dump
 
 From [Wikistats: Pageview complete dumps](https://dumps.wikimedia.org/other/pageview_complete/readme.html):
 
@@ -31,6 +35,8 @@ From [Wikistats: Pageview complete dumps](https://dumps.wikimedia.org/other/page
 > - From 2015 to the present: from the latest pageview definition
 
 Here we are interested in the last one
+
+### Dump 2
 
 https://dumps.wikimedia.org/other/pageviews/
 
@@ -46,6 +52,27 @@ https://dumps.wikimedia.org/other/pageviews/
 ## Files
 
 ### ```pageviews-[YYYYMMDD]-automated```
+
+```
+charelfelten@Charels-MacBook-Pro data % head -n10 pageviews-20210101-automated
+```
+produces
+```
+aa.wikibooks Main_Page null desktop 8 F8
+aa.wikibooks Special:Book null desktop 1 F1
+aa.wikibooks Special:CiteThisPage null desktop 1 F1
+aa.wikibooks Special:DownloadAsPdf null desktop 1 F1
+aa.wikibooks Special:SpecialPages null desktop 1 F1
+aa.wikibooks Special:UserLogin null desktop 1 F1
+aa.wikipedia Special:Statistics null desktop 24 A1B1C1D1E1F1G1H1I1J1K1L1M2O1P1Q1R1S1T1U2W1X1
+ab.wikipedia 1759 7945 desktop 11 U11
+ab.wikipedia Ашаблон:POL 3983 desktop 1 M1
+ab.wikipedia Ашаблон:Абираҟдырга/Польша 3947 desktop 1 M1
+```
+
+- we see 6 columns:
+
+
 
 
 
