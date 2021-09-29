@@ -50,7 +50,7 @@ https://dumps.wikimedia.org/other/pageviews/
     - Minor thing, but MacOS seems to uncompress the .bz file immediately after download, can find the .bz file in bin automatically
 
 
-### Dump 3
+### Dump 3: The big database
 
 On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Research:Page_view#Data_sources_that_use_this_definition) links to a [Hive database with page data](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageview_hourly)
 - uses the schema described on the Research:Page view page exactly
@@ -58,6 +58,10 @@ On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Rese
 - Contains data from 1 May 2015 until now, **however not publicly accessible as of 2018.** So there are 3 years public and 3 years private
 - but it **links to code that is used to generate this database** (See "See also" section at bottom)
 - more info: https://www.mediawiki.org/wiki/Wikimedia_Product/Data_dictionary/pageviews_hourly
+- it seems that the information that is thus not publicly available, as it is not in the other dumps, is:
+    - `referer`
+    - `country`
+    - all other info seems to be partially available in the other datasets, particularly dump1
 
 
 ## Files
@@ -78,6 +82,13 @@ ab.wikipedia Ашаблон:Абираҟдырга/Польша 3947 desktop 1 M
 ```
 
 - 6 columns
+- guessing the column contents:
+    - 1: looks like a partially/non-abbreviated version of `domain_code1`
+    - 2: pretty sure its `page_title`
+    - 3: ??? maybe `count_views`
+    - 4: could be `access_method`, in dump2 this is done with the `m` in first column (mobile page), but not even sure if they are the same
+    - 5: ??? maybe `count_views`
+    - 6: ???
 - 8,353,208 lines
 - 90MB compressed (bz2)
 - 500MB uncompressed
@@ -138,10 +149,10 @@ aa.m.b User:Sir_Lestaty_de_Lioncourt 1 0
 ```
 
 - 4 columns, [Explanation](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews):
-    - `domain_code1`: abbreviated domain of the request
-    - `page_title`: "title of the unnormalized part after /wiki/"
-    - `count_views`: number of page views in hour
-    - `total_response_size`: total response size caused by the requests for this page in the respective hour
+    - 1: `domain_code1`: abbreviated domain of the request
+    - 2: `page_title`: "title of the unnormalized part after /wiki/"
+    - 3: `count_views`: number of page views in hour
+    - 4: `total_response_size`: total response size caused by the requests for this page in the respective hour
 
 - Example: ```de.m.voy Berlin 176 314159``` means 176 requests to "de.m.wikivoyage.org/wiki/Berlin", which accounted in total for 314159 response bytes
 - Each domain_code and page_title pair occurs at most once
