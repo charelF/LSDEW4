@@ -43,11 +43,20 @@ https://dumps.wikimedia.org/other/pageviews/
 - [Documentation](https://meta.wikimedia.org/wiki/Research:Page_view)
 - 2 files per hour, so 48 per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageviews/2021/2021-01/):
     - ```pageviews-20210101-000000.gz``` (~00:30-01:30) (~40MB compressed (gz), **~150MB uncompressed**)
-    - ```projectviews-20210101-000000``` (~00:30-01:30) (19KB uncompressed)
+    - `projectviews-20210101-000000` (~00:30-01:30) (19KB uncompressed)
 
 - Notes:
     - download speed seems to be throttled aswell, did not go over (~2-3MB/s)
     - Minor thing, but MacOS seems to uncompress the .bz file immediately after download, can find the .bz file in bin automatically
+
+
+### Dump 3
+
+On the [Section6 on the Research:Page view](https://meta.wikimedia.org/wiki/Research:Page_view#Data_sources_that_use_this_definition) links to a [Hive database with page data](Analytics/Data Lake/Traffic/Pageview hourly)
+- uses the schema described on the Research:Page view page exactly
+- **stored in Parquet forma**
+- **However not publicly accessible as of 2018**
+- but it **links to code that is used to generate this database** (See "See also" section at bottom)
 
 ## Files
 
@@ -131,17 +140,15 @@ aa.m.b User:Sir_Lestaty_de_Lioncourt 1 0
     - ```page_title```: "title of the unnormalized part after /wiki/"
     - ```count_views```: number of page views in hour
     - ```total_response_size```: total response size caused by the requests for this page in the respective hour
-- 4,855,510 lines
-- 40MB compressed (gz)
-- 150MB uncompressed
 
-More info (from [Source](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews)):
 - Example: ```de.m.voy Berlin 176 314159``` means 176 requests to "de.m.wikivoyage.org/wiki/Berlin", which accounted in total for 314159 response bytes
 - Each domain_code and page_title pair occurs at most once
 - The file is sorted by domain_code and page_title. Same Source
 - there is a similar dataset that has been depreceated by now. [More Info](https://wikitech.wikimedia.org/wiki/Analytics/Archive/Data/Pagecounts-raw). Not the same as Dump1)
 - Relevant to our Project! **It filters out as many spiders and bots as we can detect**
-- many more things on the source page
+- 4,855,510 lines
+- 40MB compressed (gz)
+- 150MB uncompressed
 
 
 ### Dump 2 ```projectviews-[YYYYMMDD]-[HHMMSS]```
