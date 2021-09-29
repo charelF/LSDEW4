@@ -131,3 +131,7 @@ dmypy.json
 # custom
 data/
 .DS_Store
+
+
+# data file
+pageviews-201501-user.bz2
