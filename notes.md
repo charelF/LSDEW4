@@ -2,7 +2,7 @@
 
 2021-09-29
 
-## [Wikistats: Pageview complete dumps](https://dumps.wikimedia.org/other/pageview_complete/readme.html)
+## [Dumps](https://dumps.wikimedia.org/other/pageview_complete/readme.html)
 
 ### Dump 1
 
@@ -10,7 +10,15 @@ a first dump is at the top of the page
 
 > Maintained by the Wikimedia Analytics team [Link to the dumps](https://dumps.wikimedia.org/other/pageview_complete/)
 
-a bit lower on the page, we can find another dump
+https://dumps.wikimedia.org/other/pageview_complete/
+
+- 3 files per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageview_complete/2021/2021-01/):
+    - ```pageviews-20210101-automated.bz2``` (~100MB compressed (bz2), **~500MB uncompressed**)
+    - ```pageviews-20210101-spider.bz2``` (~1GB compressed (bz2))
+    - ```pageviews-20210101-user.bz2``` (~500MB compressed (bz2))
+
+- Notes:
+    - download speed seems to be throttled a lot, took over few minutes to download the 1GB file (~2-3MB/s) despite being on a 300 mbit network (so ~35+MB/s possible)
 
 ### Dump 2
 
@@ -24,21 +32,6 @@ From [Wikistats: Pageview complete dumps](https://dumps.wikimedia.org/other/page
 
 Here we are interested in the last one
 
-## Dump 1
-
-https://dumps.wikimedia.org/other/pageview_complete/
-
-- 3 files per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageview_complete/2021/2021-01/):
-    - ```pageviews-20210101-automated.bz2``` (~100MB compressed (bz2), **~500MB uncompressed**)
-    - ```pageviews-20210101-spider.bz2``` (~1GB compressed (bz2))
-    - ```pageviews-20210101-user.bz2``` (~500MB compressed (bz2))
-
-- Notes:
-    - download speed seems to be throttled a lot, took over few minutes to download the 1GB file (~2-3MB/s) despite being on a 300 mbit network (so ~35+MB/s possible)
-
-
-## Dump 2
-
 https://dumps.wikimedia.org/other/pageviews/
 
 - Contains documentation: https://meta.wikimedia.org/wiki/Research:Page_view
@@ -49,6 +42,12 @@ https://dumps.wikimedia.org/other/pageviews/
 - Notes:
     - download speed seems to be throttled aswell, did not go over (~2-3MB/s)
     - MacOS seems to uncompress the .bz file immediately after download
+
+## Files
+
+### ```pageviews-[YYYYMMDD]-automated```
+
+
 
 
 
