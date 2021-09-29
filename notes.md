@@ -184,9 +184,13 @@ ady.m - 7 0
 
 ### Other useful links
 
-- [Interesting and Relevant Blog post](https://techblog.wikimedia.org/2020/10/05/bot-or-not-identifying-fake-traffic-on-wikipedia/) about identifying traffic types and differences between legitimate and illegitimate traffic. Particularly:
+[Interesting and Relevant Blog post](https://techblog.wikimedia.org/2020/10/05/bot-or-not-identifying-fake-traffic-on-wikipedia/) about identifying traffic types and differences between legitimate and illegitimate traffic. Particularly:
 
-> Up to April 2020, our classification for pageviews included only two types of actors: **“users”** and **“spiders”** (self-identified crawlers like Googlebot). Since all traffic not self-identified as “bot” was identified as “user,” quite a significant percentage of “bot spam” traffic was tagged as “user” traffic. This simple classification distorted our pageview numbers, as it made it seem that there was more user traffic than there really was. For example, we estimated that in 2019 between 5 to 8% of desktop pageviews in English Wikipedia tagged as “user” traffic was actually coming from “bot spammers/vandals.” That number could be as high as 800 pageviews a second. We continue processing and cataloging these requests, and **from April 2020 onwards the traffic we identify as coming from spammers** is tagged with the label **“automated.”** You can see here that it represents about 5% of total traffic. 
+- > Up to April 2020, our classification for pageviews included only two types of actors: **“users”** and **“spiders”** (self-identified crawlers like Googlebot). Since all traffic not self-identified as “bot” was identified as “user,” quite a significant percentage of “bot spam” traffic was tagged as “user” traffic. This simple classification distorted our pageview numbers, as it made it seem that there was more user traffic than there really was. For example, we estimated that in 2019 between 5 to 8% of desktop pageviews in English Wikipedia tagged as “user” traffic was actually coming from “bot spammers/vandals.” That number could be as high as 800 pageviews a second. We continue processing and cataloging these requests, and **from April 2020 onwards the traffic we identify as coming from spammers** is tagged with the label **“automated.”** You can see here that it represents about 5% of total traffic. 
+
+- > The community has been hard at work finding the characteristics of spammy traffic by hand for a while. For example,  a key factor in distinguishing “automated” versus “real user traffic” was assessing whether pages had similar pageview numbers in the desktop and mobile versions.
+
+- they also mention an email address for any questions etc
 
 
 
