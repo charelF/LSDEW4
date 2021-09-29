@@ -40,14 +40,14 @@ Here we are interested in the last one
 
 https://dumps.wikimedia.org/other/pageviews/
 
-- Contains documentation: https://meta.wikimedia.org/wiki/Research:Page_view
-- 2 file per hour, so 48 per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageviews/2021/2021-01/):
+- [Documentation](https://meta.wikimedia.org/wiki/Research:Page_view)
+- 2 files per hour, so 48 per day, [for example (jan 2021)](https://dumps.wikimedia.org/other/pageviews/2021/2021-01/):
     - ```pageviews-20210101-000000.gz``` (~00:30-01:30) (~40MB compressed (gz), **~150MB uncompressed**)
     - ```projectviews-20210101-000000``` (~00:30-01:30) (19KB uncompressed)
 
 - Notes:
     - download speed seems to be throttled aswell, did not go over (~2-3MB/s)
-    - MacOS seems to uncompress the .bz file immediately after download
+    - Minor thing, but MacOS seems to uncompress the .bz file immediately after download, can find the .bz file in bin automatically
 
 ## Files
 
