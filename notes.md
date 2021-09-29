@@ -126,10 +126,23 @@ aa.m Wikipedia:Sandbox 1 0
 aa.m.b User:Sir_Lestaty_de_Lioncourt 1 0
 ```
 
-- 4 columns
+- 4 columns, [Explanation](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews):
+    - ```domain_code1```: abbreviated domain of the request
+    - ```page_title```: "title of the unnormalized part after /wiki/"
+    - ```count_views```: number of page views in hour
+    - ```total_response_size```: total response size caused by the requests for this page in the respective hour
 - 4,855,510 lines
 - 40MB compressed (gz)
 - 150MB uncompressed
+
+More info (from [Source](https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews)):
+- Example: ```de.m.voy Berlin 176 314159``` means 176 requests to "de.m.wikivoyage.org/wiki/Berlin", which accounted in total for 314159 response bytes
+- Each domain_code and page_title pair occurs at most once
+- The file is sorted by domain_code and page_title. Same Source
+- there is a similar dataset that has been depreceated by now. [More Info](https://wikitech.wikimedia.org/wiki/Analytics/Archive/Data/Pagecounts-raw). Not the same as Dump1)
+- Relevant to our Project! **It filters out as many spiders and bots as we can detect**
+- many more things on the source page
+
 
 ### Dump 2 ```projectviews-[YYYYMMDD]-[HHMMSS]```
 
