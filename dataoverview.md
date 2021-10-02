@@ -27,6 +27,7 @@ Source: https://dumps.wikimedia.org/other/analytics/
 >  estimates the count of unique devices that visit our sites without assigning unique IDs to users, in order to protect their privacy
 
  - 2 files per day, 1 containing clicks per domains, 1 containing clicks per project
+ - from 2017-04 until now
  - script: **13 MiB** (for unique devices per domain) (compressed but uncompressed similar size) (per project even smaller)
 
 example of per project for 1 day
