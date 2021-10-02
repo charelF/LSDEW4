@@ -6,7 +6,7 @@ Source: https://dumps.wikimedia.org/other/analytics/
 
 - 1 file per day, between 400 - 800 MB compressed, taking 600 MB as average
 - back-of-the-envelope: 600 * 365 * 5 = ~1.1TB compressed
-- script: 1303 GiB = 1.27TiB compressed
+- script: 1303 GiB = **1.27TiB compressed**
 - when uncompressed, size * 5
 
 ```
@@ -26,9 +26,8 @@ Source: https://dumps.wikimedia.org/other/analytics/
 
 >  estimates the count of unique devices that visit our sites without assigning unique IDs to users, in order to protect their privacy
 
- estimates the count of unique devices that visit our sites without assigning unique IDs to users, in order to protect their privacy
  - 2 files per day, 1 containing clicks per domains, 1 containing clicks per project
- - script: 13 MiB (for unique devices per domain) (compressed but uncompressed similar size) (per project even smaller)
+ - script: **13 MiB** (for unique devices per domain) (compressed but uncompressed similar size) (per project even smaller)
 
 example of per project for 1 day
 ```
@@ -47,6 +46,22 @@ wikivoyage	50365	66082	116447
 
  ## Clickstream
 
- - 32 GiB compressed
+ - documentation: [1](https://meta.wikimedia.org/wiki/Research:Wikipedia_clickstream)
+ - data from 2017-11 until now
+ - 1 file per month per domain (only 10 available: `en`, `de`, `fr`, ...)
+ - script: **32 GiB compressed**, 5-6 times larger when uncompressed
+
+ ```
+ other-empty	Pantherstaaten	external	52
+other-search	Monaco-Marathon	external	16
+Griffith_Park	Mission_Trails_Regional_Park	link	17
+Isle_of_Man_TT	Matchless	link	11
+other-search	Matchless	external	188
+Karl-Heinz_Kalbfell	Matchless	link	11
+other-empty	Matchless	external	75
+FSV_Salmrohr	Markus_Koster	link	11
+other-search	Kloster_Oetenbach	external	45
+other-empty	Kloster_Oetenbach	external	16
+```
 
 
