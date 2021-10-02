@@ -1,4 +1,4 @@
-# Overview of sizes of relevant Analytics Datasets
+# Overview of sizes of relevant Wikipedia Analytics Datasets
 
 Source: https://dumps.wikimedia.org/other/analytics/
 
@@ -52,8 +52,8 @@ wikivoyage	50365	66082	116447
  - 1 file per month per domain (only 10 available: `en`, `de`, `fr`, ...)
  - script: **32 GiB compressed**, 5-6 times larger when uncompressed
 
- ```
- other-empty	Pantherstaaten	external	52
+```
+other-empty	Pantherstaaten	external	52
 other-search	Monaco-Marathon	external	16
 Griffith_Park	Mission_Trails_Regional_Park	link	17
 Isle_of_Man_TT	Matchless	link	11
@@ -65,4 +65,16 @@ other-search	Kloster_Oetenbach	external	45
 other-empty	Kloster_Oetenbach	external	16
 ```
 
+
+# Other relevant data
+
+## Google Trends
+- https://googletrends.github.io/data/
+- Trending searches about all kinds of events, elections, movements, covid, ...
+- also on Github: https://github.com/googletrends/data
+- mostly smaller datasets (e.g. since they are on github, they are <100MB by definition)
+- similar available via Google Cloud: https://cloud.google.com/blog/topics/developers-practitioners/make-informed-decisions-google-trends-data
+
+## Twitter trending topics
+- https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
 
