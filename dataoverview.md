@@ -78,3 +78,41 @@ other-empty	Kloster_Oetenbach	external	16
 ## Twitter trending topics
 - https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place
 
+
+# Public Pageviews
+
+## Pageview complete [```/other/pageview_complete/```](https://dumps.wikimedia.org/other/pageviews/)
+
+- all pageviews
+- details https://dumps.wikimedia.org/other/pageview_complete/readme.html
+
+## Pagecounts-raw [```/other/pagecounts-raw/```](https://dumps.wikimedia.org/other/pagecounts-raw/)
+
+- 2007-12 - 2016-08
+- documentation: https://dumps.wikimedia.org/other/pagecounts-raw/
+- sample:
+```fr.b Special:Recherche/Achille_Baraguey_d%5C%27Hilliers 1 624
+fr.b Special:Recherche/Acteurs_et_actrices_N 1 739
+fr.b Special:Recherche/Agrippa_d/%27Aubign%C3%A9 1 743
+fr.b Special:Recherche/All_Mixed_Up 1 730
+```
+- > the first column "fr.b" is the project name
+- > The second column is the title of the page retrieved, the third column is the number of requests, and the fourth column is the size of the content returned
+- one file per hour
+
+## Pagecounts-ez [```other/pagecounts-ez/```](https:/other/pagecounts-ez/)
+
+- DEPRECATED:
+    - > This dataset has had some problems and we are no longer generating new data, since September 2020. We are phasing it out in favor of Pageviews Complete
+- documentation: https://dumps.wikimedia.org/other/pagecounts-ez/
+
+
+
+
+
+## Pageview [```/other/pageviews/```](https://dumps.wikimedia.org/other/pageviews/)
+
+- filtered to only human traffic
+
+##  "corrected for outages"
+
