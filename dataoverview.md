@@ -144,7 +144,7 @@ fr.b Special:Recherche/Agrippa_d/%27Aubign%C3%A9 1 743
 fr.b Special:Recherche/All_Mixed_Up 1 730
 ```
 
-## Pagecounts-ez [```/other/pagecounts-ez/```](https:/other/pagecounts-ez/)
+## Pagecounts-ez [```/other/pagecounts-ez/```](https:dumps.wikimedia.org/other/pagecounts-ez/)
 
 - **DEPRECATED**:
     - > This dataset has had some problems and we are no longer generating new data, since September 2020. We are phasing it out in favor of Pageviews Complete
