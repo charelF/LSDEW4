@@ -88,9 +88,12 @@ other-empty	Kloster_Oetenbach	external	16
 - > Pageview complete is our best effort to provide a comprehensive timeseries of per-article pageview data for Wikimedia projects. Data spans from December 2007 to the present with a uniform format and compression.
 - **Documentation**: https://dumps.wikimedia.org/other/pageview_complete/readme.html
 - **Period**: 2011-12 - NOW
-- 2011-12 - 2015-04: only the `user` file, 1 file per day
-- 2015-05 - 2020-05: `user` and `spider` distinction, 2 files per day
-- 2020-06 - NOW: `user`, `spider` and `automated` distinction, 3 files per day
+    - 2011-12 - 2015-04: only the `user` file, 1 file per day
+    - 2015-05 - 2020-05: `user` and `spider` distinction, 2 files per day
+    - 2020-06 - NOW: `user`, `spider` and `automated` distinction, 3 files per day
+    - > From 2007 to 2011: from pagecounts-raw (to be loaded during the second half of October 2020)
+    - > From 2011 to 2015: from pagecounts-ez
+    - > From 2015 to the present: from the latest pageview definition
 - available as daily files and monthly files
 - details https://dumps.wikimedia.org/other/pageview_complete/readme.html
 - > **KNOWN ISSUE:** rows without Page IDs have only 5 columns, while rows with Page IDs have 6. We are applying a fix which will take some time.
