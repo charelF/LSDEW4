@@ -83,13 +83,18 @@ other-empty	Kloster_Oetenbach	external	16
 
 ## Pageview complete [```/other/pageview_complete/```](https://dumps.wikimedia.org/other/pageviews/)
 
-- all pageviews
+- > Pageview complete is our best effort to provide a comprehensive timeseries of per-article pageview data for Wikimedia projects. Data spans from December 2007 to the present with a uniform format and compression.
+- **Documentation**: https://dumps.wikimedia.org/other/pageview_complete/readme.html
+- **Period**: 2011-12 - NOW
+- 2011-12 - 2015-04: only the `user` file, 1 file per day
+- 2015-05 - NOW: `user`, `spider` and `automated` distinction, 3 files per day
+- available as daily files and monthly files
 - details https://dumps.wikimedia.org/other/pageview_complete/readme.html
 
 ## Pagecounts-raw [```/other/pagecounts-raw/```](https://dumps.wikimedia.org/other/pagecounts-raw/)
 
-- 2007-12 - 2016-08
-- documentation: https://dumps.wikimedia.org/other/pagecounts-raw/
+- **Period**: 2007-12 - 2016-08
+- **Documentation**: https://dumps.wikimedia.org/other/pagecounts-raw/
 - sample:
 ```fr.b Special:Recherche/Achille_Baraguey_d%5C%27Hilliers 1 624
 fr.b Special:Recherche/Acteurs_et_actrices_N 1 739
@@ -98,14 +103,36 @@ fr.b Special:Recherche/All_Mixed_Up 1 730
 ```
 - > the first column "fr.b" is the project name
 - > The second column is the title of the page retrieved, the third column is the number of requests, and the fourth column is the size of the content returned
-- one file per hour
+- 1 file per hour
 
 ## Pagecounts-ez [```other/pagecounts-ez/```](https:/other/pagecounts-ez/)
 
-- DEPRECATED:
+- **DEPRECATED**:
     - > This dataset has had some problems and we are no longer generating new data, since September 2020. We are phasing it out in favor of Pageviews Complete
-- documentation: https://dumps.wikimedia.org/other/pagecounts-ez/
+- **Period**: 
+    - 2007-12 - 2015-04: links to [```/other/pagecounts-raw/```](#Pagecounts-raw)
+    - 2015-05 - NOW: links to [```other/pageviews/```](#Pageview)
+- **Documentation**: https://dumps.wikimedia.org/other/pagecounts-ez/
 
+## Pagecounts-ez-merged [```/other/pagecounts-ez/merged/```](https://dumps.wikimedia.org/other/pagecounts-ez/merged/)
+
+- > Hourly page views per article for around 30 million article titles (Sept 2013) in around 800+ Wikimedia wikis. Repackaged (with extreme shrinkage, without losing granularity), corrected, reformatted. Daily files and two monthly files
+- **Documentation**:  https://dumps.wikimedia.org/other/pagecounts-ez/
+- **Period**: 2011-11 - 2020-09
+- is mentioned only on [Pagecounts-ez](#Pagecounts-ez)
+- also most likely **DEPRECATED**
+
+
+## Pagecounts-ez-projectcount [```/other/pagecounts-ez/projectcounts/```](https://dumps.wikimedia.org/other/pagecounts-ez/projectcounts/)
+
+- > Hourly page views per wiki, corrected for site outages and underreporting. Also repackaged, as one tar file per year.
+- **Documentation**:  https://dumps.wikimedia.org/other/pagecounts-ez/ and a readme: https://dumps.wikimedia.org/other/pagecounts-ez/projectcounts/readme.txt
+- **Period**: 2008 - 2016
+- 1 file per year
+
+## Pagecounts-ez-wikistats [```/other/pagecounts-ez/wikistats/```](https://dumps.wikimedia.org/other/pagecounts-ez/wikistats/)
+
+- very confusing files
 
 
 
