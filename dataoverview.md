@@ -144,7 +144,7 @@ fr.b Special:Recherche/Agrippa_d/%27Aubign%C3%A9 1 743
 fr.b Special:Recherche/All_Mixed_Up 1 730
 ```
 
-## Pagecounts-ez [```other/pagecounts-ez/```](https:/other/pagecounts-ez/)
+## Pagecounts-ez [```/other/pagecounts-ez/```](https:/other/pagecounts-ez/)
 
 - **DEPRECATED**:
     - > This dataset has had some problems and we are no longer generating new data, since September 2020. We are phasing it out in favor of Pageviews Complete
@@ -197,3 +197,10 @@ aa Wikipedia:Community_Portal 1 0
     - `count_views`
     - `total_response_size`
 
+
+## Pagecounts-all-sizes [```/other/pagecounts-all-sites/```](https://dumps.wikimedia.org/other/pagecounts-all-sites/)
+
+- > **Deprecated**
+- like ```pagecounts-raw```, but also collects mobile data
+- **Documentation**: short readme: https://dumps.wikimedia.org/other/pagecounts-all-sites/README.txt, more: https://wikitech.wikimedia.org/wiki/Analytics/Archive/Data/Pagecounts-all-sites
+- **Period**: 2014-09 - 2016-08
