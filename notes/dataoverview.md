@@ -83,7 +83,7 @@ other-empty	Kloster_Oetenbach	external	16
 
 # Public Pageviews
 
-## Pageview complete [```/other/pageview_complete/```](https://dumps.wikimedia.org/other/pageviews/)
+## Pageview complete [```/other/pageview_complete/```](https://dumps.wikimedia.org/other/pageview_complete/)
 
 - > Pageview complete is our best effort to provide a comprehensive timeseries of per-article pageview data for Wikimedia projects. Data spans from December 2007 to the present with a uniform format and compression.
 - **Documentation**: https://dumps.wikimedia.org/other/pageview_complete/readme.html
