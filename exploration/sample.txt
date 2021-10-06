@@ -20,3 +20,11 @@ zh.wikisource 第六届全国人民代表大会第三次会议关于批准《中
 als.wikipedia 808 64376 desktop 1 P1
 als.wikipedia A desktop 1 I1
 als.wikipedia Ada_Lovelace 51323 mobile-web 1 P1
+th.wikipedia 23_สิงหาคม 12013 desktop 1 H1
+jv.wikipedia 26_Juni 2278 desktop 1 F1
+ja.wikipedia 10ギガビット・イーサネット 1194926 desktop 4 D2F1I1
+ja.wikipedia 185 589222 desktop 1 F1
+en.wikipedia B̤ē 4889214 desktop 6 F5I1
+en.wikipedia 0-3-0 14287894 desktop 1 C1
+en.wikipedia 10.9 31104124 mobile-web 1 X1
+ar.wikipedia الأثر_الاقتصادي_لجائحة_فيروس_كورونا_2019–20 7429096 mobile-web 1 N1
