@@ -1,16 +1,13 @@
 en.charel TEST_9999countAtTime0,1countAtTime1,2countAtTime3, 1234 mobile 123 A9999B1C2
 en.wikipedia Ānanda 1735 desktop 3 P1V1W1
-en.wikipedia Ānanda 1735 desktop 3 P1V1W1
 en.wikipedia Škovec,_Trebnje 30815184 desktop 1 I1
 en.wikipedia ̌ 236552 desktop 3 E1F1G1
 en.wikipedia ่ 63731 desktop 1 F1
 en.wikipedia ∿ 324749 desktop 3 F1M1X1
-en.wikipedia 🇹🇱 459021 desktop 1 F1
 en.wikipedia 🦥 5168174 desktop 2 F1S1
 en.wikipedia - 1066347 desktop 2 O1P1
-en.wikipedia - 1076845 desktop 1 P1
-en.wikipedia - 1107266 desktop 1 M1
 en.wikipedia - 111765 desktop 1 T1
+es.charel 1234 abcd desktop 1 T1
 ar.wikipedia صاروخ_باليستي_عابر_للقارات 240808 desktop 1 F1
 ar.wikipedia عصور_وسطى_متوسطة 471789 desktop 1 P1Q1
 en.wikipedia Talk:H:IPA null desktop 2 J2
