@@ -1,4 +1,5 @@
 import pandas as pd
+import bz2
 
 def fastreader(input_file, output_file, maxlines = 10 * 1000 * 1000 * 1000):
     """ fastest way to convert original wikipedia file into cleaned parquet
@@ -6,7 +7,7 @@ def fastreader(input_file, output_file, maxlines = 10 * 1000 * 1000 * 1000):
 
         input:
         - input_file:
-            - uncompressed file from wikipedia
+            - uncompressed (or compressed) file from wikipedia
             - example: "../data/pageviews-20210101-automated"
             - it is important that the filename is exactly as in the article, so pageviews-[date]-[traffic_type] and without extension (no .txt)
         - output_file:
@@ -26,30 +27,34 @@ def fastreader(input_file, output_file, maxlines = 10 * 1000 * 1000 * 1000):
 
     if output_file.endswith("/"):
         # output file is a directory
-        outpuf_file = output_file + input_file_name + ".parquet"
+        output_file = output_file + input_file_name + ".parquet"
 
-    if output_file[-8:] != ".parquet":
+    if not (output_file.endswith(".parquet")):
         print("ERROR: outputfile is not a valid parquet file!")
+
+    if input_file.endswith(".bz2"):
+        openfile = lambda x: bz2.open(x, mode="rt")
+    else:
+        openfile = open
 
     outlist = []
 
     print(f"begin processing on file: {input_file}")
-    with open(input_file) as infile:
+    with openfile(input_file) as infile:
         for i, line in enumerate(infile):
 
-            # printing
-            if i > maxlines:
+            if (i > maxlines):  # early stop
                 break
-            if ((i % 1000000) == 0):
-                print(f"lines read: {(i//1000000)+1}M")
+            if (i > 0) and ((i % 1000000) == 0):  # progress
+                print(f"lines read: {i//1000000}M")
 
             # split line into list of words
             wordlist = line.split(" ")
-
             if len(wordlist) == 5:
                 # the case where we do not have an ID
                 wordlist.insert(2, "null")
 
+            # replace all null IDs by simply -1 so its numeric
             if wordlist[2] == "null":
                 wordlist[2] = "-1"
 
@@ -85,6 +90,10 @@ def fastreader(input_file, output_file, maxlines = 10 * 1000 * 1000 * 1000):
     df["month"] = yyyymmdd[4:6]
     df["day"] = yyyymmdd[6:8]
     df["traffic_type"] = traffic_type
+
+    # TODO: optimise data types
+    # e.g. ID used to be a string, but now we could make it a signed integer etc
+    # traffic_type and access_type could both be stored with 2 bits, so we can greatly reduce
 
     print(f"write parquet to file: {output_file} (may take some time due to partitioning)")
     df.to_parquet(output_file, partition_cols=["year", "month", "day"])
