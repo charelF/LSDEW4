@@ -63,6 +63,7 @@ class MI:
 		dvec = [];
 		for i in range(len(x)):
 			dvec.append([])	
+		
 		for point in points:
 			#Find k-nearest neighbors in joint space, p=inf means max norm
 			knn = tree.query(point,k+1,p=float('inf'));
