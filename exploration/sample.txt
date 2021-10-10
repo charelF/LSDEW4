@@ -159,3 +159,6 @@ vi.wikivoyage <!-- 1756 desktop 1 I1
 zh.wikipedia �
 w��(� 3597889 desktop 1 W1
 zh.wikipedia � 138870 desktop 1 H1
+en.wikipedia Segment
+
+ mobile-app 1 V1
