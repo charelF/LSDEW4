@@ -1,4 +1,3 @@
-en.charel TEST_9999countAtTime0,1countAtTime1,2countAtTime3, 1234 mobile 123 A9999B1C2
 en.wikipedia Ānanda 1735 desktop 3 P1V1W1
 en.wikipedia Škovec,_Trebnje 30815184 desktop 1 I1
 en.wikipedia ̌ 236552 desktop 3 E1F1G1
@@ -145,14 +144,14 @@ vi.wikiquote ................windowswin.ini desktop 18 D4G4I10
 vi.wikiquote ../.../.././../.../.././../.../.././../.../.././../.../.././../.../.././etc/passwd 1 desktop 10 D1F9
 vi.wikiquote ../../../../../../../../../../boot.ini 1 desktop 10 D1F9
 vi.wikiquote 1'" desktop 18 D4G4J10
-vi.wikiquote 12345'"\'\");|]* {
-< >�''💩 1 desktop 10 D1E9
-vi.wikiquote 12345'"\'\");|]* {
-< >�''💩 1836 desktop 2 D1E1
-vi.wikiquote 12345'"\'\");|]* {
-< >�''💩 2905 desktop 2 D1E1
-vi.wikiquote 12345'"\'\");|]* {
-< >�''💩 desktop 18 D4G4I10
+vi.wikiquote 12345'"\'\");|]*�{
+<�>�''💩 1 desktop 10 D1E9
+vi.wikiquote 12345'"\'\");|]*�{
+<�>�''💩 1836 desktop 2 D1E1
+vi.wikiquote 12345'"\'\");|]*�{
+<�>�''💩 2905 desktop 2 D1E1
+vi.wikiquote 12345'"\'\");|]*�{
+<�>�''💩 desktop 18 D4G4I10
 vi.wikiquote 149GVcrc 1836 desktop 1 E1
 vi.wikisource Http://testasp.vulnweb.com/t/fit.txt 21456 desktop 2 E1G1
 vi.wikivoyage <!-- 1756 desktop 1 I1
