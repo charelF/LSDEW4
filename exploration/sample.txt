@@ -156,3 +156,6 @@ vi.wikiquote 12345'"\'\");|]* {
 vi.wikiquote 149GVcrc 1836 desktop 1 E1
 vi.wikisource Http://testasp.vulnweb.com/t/fit.txt 21456 desktop 2 E1G1
 vi.wikivoyage <!-- 1756 desktop 1 I1
+zh.wikipedia �
+w��(� 3597889 desktop 1 W1
+zh.wikipedia � 138870 desktop 1 H1
