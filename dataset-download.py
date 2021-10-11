@@ -1,7 +1,7 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC 
-# MAGIC # Crawl 
+# MAGIC # Crawl `pageviews_complete` dataset
 # MAGIC This notebooks contains code to crawl the `pageviews_complete` dataset from the Wikimedia servers.
 
 # COMMAND ----------
@@ -21,6 +21,10 @@ import re
 # COMMAND ----------
 
 download_links = open("/dbfs/mnt/group09/download_links.txt").read().strip().split("\n")
+
+# COMMAND ----------
+
+download_links
 
 # COMMAND ----------
 
@@ -62,13 +66,10 @@ spark = SparkSession \
   .config("spark.dynamicAllocation.enabled", "true") \
   .getOrCreate()
 
-rdd = spark.sparkContext.parallelize(download_links)
+filtered_download_links = [link for link in download_links if re.search(r"pageview_complete/20(18|19|20|21)", link)]
+rdd = spark.sparkContext.parallelize(filtered_download_links)
 df = rdd.map(download_file).toDF()
-df.groupby(df[0]).sum().display()
-
-# COMMAND ----------
-
-download_file("https://dumps.wikimedia.org/other/pageview_complete/monthly/2018/2018-01/pageviews-201801-spider.bz2")
+df.groupby(df[0]).sum().show()
 
 # COMMAND ----------
 
@@ -98,7 +99,7 @@ len(ok_paths)
 # COMMAND ----------
 
 files = json.loads(open("/dbfs/mnt/group09/sizes.json").read())
-sizes = {"/".join(f['file'].split("/")[4:]): f['size'] for f in files if re.search(r"20(1[8-9]|2[0-1])-", f["file"])}
+sizes = {"/".join(f['file'].split("/")[4:]): f['size'] for f in files if re.search(r"pageview_complete/20(1[8-9]|2[0-1])", f["file"])}
 
 verified_urls = set()
 invalid_urls = set()

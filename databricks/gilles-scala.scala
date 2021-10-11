@@ -139,4 +139,9 @@ md.digest("Hoger".getBytes("UTF-8")).to[Array].map("%02x".format(_)).mkString
 
 // COMMAND ----------
 
+val t = Array(1, 2, 3, 4)
+t.map(v => v+1)
+
+// COMMAND ----------
+
 

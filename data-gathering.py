@@ -165,4 +165,20 @@ download_links[-1]
 
 # COMMAND ----------
 
+sum([f.size for f in dbutils.fs.ls("/mnt/group09/test.parquet")]) / (2**30)
+
+# COMMAND ----------
+
+dbutils.fs.ls("/mnt/group09/test.parquet")
+
+# COMMAND ----------
+
+127058303 // 2**20
+
+# COMMAND ----------
+
+len([f for f in dbutils.fs.ls("/mnt/group09/test.parquet") if f.name.startswith("part-")])
+
+# COMMAND ----------
+
 
