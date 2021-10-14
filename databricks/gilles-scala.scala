@@ -3,6 +3,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.matching.Regex
 import org.apache.spark.sql.{Row, Column}
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
 
 // COMMAND ----------
 
@@ -12,10 +13,9 @@ object Job {
   def extractHours(row: String): ArrayBuffer[PageView] = {
     val counts = ArrayBuffer[PageView]()
 
-    val validStart: Regex = raw"^[^ ]+ [^ ]+ ([0-9]* )?".r
-    val validEnd: Regex = raw"[0-9]+ ([A-Z][0-9]+)+$$".r
-
-    if ((validStart.findAllMatchIn(row).size != 0) & (validEnd.findAllMatchIn(row).size != 0)) {
+    val validRow: Regex = raw"^[^ ]+ [^ ]+ ([0-9]*)? [^ ]+ [0-9]+ ([A-Z][0-9]+)+$$".r
+    
+    if (validRow.findAllMatchIn(row).size != 0) {
       return counts
     }
 
@@ -51,60 +51,38 @@ object Job {
 
 // COMMAND ----------
 
-val paths = Array(
-  //"/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190905-user.bz2",
-  "/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190906-user.bz2",
-  "/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190907-user.bz2",
-  "/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190908-user.bz2",
-  "/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190909-user.bz2",
-  "/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190910-user.bz2",
-)
+val paths = (5 to 10).map(day => f"/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-201909$day%02d-*.bz2").mkString(",")
+paths
 
 // COMMAND ----------
 
-for (path <- paths) {
-  val date = path.split("/").last.split("-")(1)
-  val (year, month, day) = (date.substring(0, 4), date.substring(4, 6), date.substring(6))
-  
-  sc
-    .textFile(path)
-    .flatMap(Job.extractHours)
-    .toDF()
-    .withColumn("year", lit(year))
-    .withColumn("month", lit(month))
-    .withColumn("day", lit(day))
-    .repartitionByRange(4, col("hour"))
-    .sort("year", "month", "day", "hour")
-    .write
-    .mode("append")
-    .partitionBy("year", "month", "day")
-    .parquet("/mnt/group09/attack.parquet")
-}
+sc
+  .textFile(paths)
+  .flatMap(Job.extractHours)
+  .toDF()
+  .withColumn("filename", split(input_file_name, "/").getItem(7))
+  .withColumn("date", split(col("filename"), "-").getItem(1))
+  .withColumn("trafficType", split(col("filename"), "-").getItem(2))
+  .withColumn("year", substring(col("date"), 0, 4).cast(IntegerType))
+  .withColumn("month", substring(col("date"), 5, 2).cast(IntegerType))
+  .withColumn("day", substring(col("date"), 7, 2).cast(IntegerType))
+  .drop("filename", "date")
+  .repartitionByRange(4, col("hour"))
+  .sort("year", "month", "day", "hour")
+  .write
+  .mode("overwrite")
+  .partitionBy("year", "month", "day")
+  .parquet("/mnt/group09/attack.parquet")
 
 // COMMAND ----------
 
-sc.parallelize
+// MAGIC %sh ls -l /dbfs/mnt/group09/attack.parquet/year=2019/month=9/day=10
 
 // COMMAND ----------
 
-// MAGIC %python
-// MAGIC 
-// MAGIC from pathlib import Path
-// MAGIC 
-// MAGIC sum([sum([t.size for t in dbutils.fs.ls(str(f).strip("/dbfs"))]) for f in Path("/dbfs/mnt/group09/user.parquet").glob("year=*/month=*/day=*")]) // 2**30
-
-// COMMAND ----------
-
-val df = spark.read.parquet("/mnt/group09/user.parquet")
-
-// COMMAND ----------
-
-display(df
-  .groupBy(col("domain"), col("day"))
-  .agg(max("count").alias("max_count"))
+display(
+  spark.read.parquet("/mnt/group09/attack.parquet")
+  .groupBy(col("trafficType"))
+  .agg(sum("count").alias("max_count"))
   .orderBy(desc("max_count"))
 )
-
-// COMMAND ----------
-
-
