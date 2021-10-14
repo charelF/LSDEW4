@@ -4,7 +4,39 @@
 
 # COMMAND ----------
 
-# dbutils.fs.ls("/mnt/lsde/flickr")
+# MAGIC %sh
+# MAGIC ls -lhS /dbfs/mnt/group09
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls /dbfs/mnt/group09/attack.parquet
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls /dbfs/mnt/group09
+
+# COMMAND ----------
+
+df = spark.read.parquet("/mnt/group09/attack.parquet")
+
+# COMMAND ----------
+
+df.show(10)
+
+# COMMAND ----------
+
+df.count()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
+# MAGIC #### visualisations:
+# MAGIC - visualisations: https://docs.databricks.com/notebooks/visualizations/index.html
+# MAGIC - dashboards (combination of graphs): https://docs.databricks.com/notebooks/dashboards.html
+# MAGIC - interactive tables: https://docs.databricks.com/notebooks/widgets.html
 
 # COMMAND ----------
 
