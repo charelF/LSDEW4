@@ -45,13 +45,24 @@ extractHours("en.wikipedia abc 111765 desktop 1 A1T1\n")
 // COMMAND ----------
 
 sc
-.textFile("/FileStore/group09/samples/cleansample.txt", 1)  // .textFile("/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190907-user.bz2", 1)
+.textFile("/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-20190907-user.bz2", 1)
 .flatMap(extractHours)
 .toDF()
 .repartitionByRange(4, col("hour"))
 .write
 .mode("overwrite")
 .parquet("/mnt/group09/pageviews-20190907-user.parquet")
+
+// COMMAND ----------
+
+sc
+.textFile("/FileStore/group09/samples/cleansample.txt", 1)
+.flatMap(extractHours)
+.toDF()
+.repartitionByRange(4, col("hour"))
+.write
+.mode("overwrite")
+.parquet("/mnt/group09/cleansample.parquet")
 
 // COMMAND ----------
 
