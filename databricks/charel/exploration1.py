@@ -25,28 +25,8 @@ df.show(10)
 
 # COMMAND ----------
 
-query = df.groupby("hour").sum("count").orderBy(asc("hour"))
-
-# COMMAND ----------
-
-query.cache()
-
-# COMMAND ----------
-
-query.show()
+query = df.groupby("domain").sum("count").withColumnRenamed("sum(count)", "sumCount").orderby()
 
 # COMMAND ----------
 
 display(query)
-
-# COMMAND ----------
-
-# import pandas as pd
-
-# pandasdf = pd.read_parquet("/dbfs/mnt/group09/cleansample.parquet")
-
-# pandasdf
-
-# COMMAND ----------
-
-
