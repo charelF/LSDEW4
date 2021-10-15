@@ -51,8 +51,29 @@ object Job {
 
 // COMMAND ----------
 
-val paths = (5 to 10).map(day => f"/mnt/lsde/wikimedia/pageview_complete/2019/2019-09/pageviews-201909$day%02d-*.bz2").mkString(",")
-paths
+val paths = (2018 to 2019).flatMap(
+   year => (9 to 9).flatMap(
+     month => (1 to 30).map(
+     day => (day, month, year)
+   )
+ ) 
+).map(date => date match {
+    case (day, month, year) => f"/mnt/lsde/wikimedia/pageview_complete/$year/$year-$month%02d/pageviews-$year$month%02d$day%02d-*.bz2"
+}).mkString(",")
+
+// COMMAND ----------
+
+display(sc
+  .textFile("/mnt/group09/pageviews-20190905-user.bz2")
+  .flatMap(Job.extractHours)
+  .toDF()
+  .withColumn("filename", split(input_file_name, "/").getItem(3))
+  .withColumn("date", split(col("filename"), "-").getItem(1))
+  .withColumn("trafficType", split(split(col("filename"), "-").getItem(2), "\\.").getItem(0))
+  .withColumn("year", substring(col("date"), 0, 4).cast(IntegerType))
+  .withColumn("month", substring(col("date"), 5, 2).cast(IntegerType))
+  .withColumn("day", substring(col("date"), 7, 2).cast(IntegerType))
+        )
 
 // COMMAND ----------
 
@@ -62,7 +83,7 @@ sc
   .toDF()
   .withColumn("filename", split(input_file_name, "/").getItem(7))
   .withColumn("date", split(col("filename"), "-").getItem(1))
-  .withColumn("trafficType", split(col("filename"), "-").getItem(2))
+  .withColumn("trafficType", split(split(col("filename"), "-").getItem(2), "\\.").getItem(0))
   .withColumn("year", substring(col("date"), 0, 4).cast(IntegerType))
   .withColumn("month", substring(col("date"), 5, 2).cast(IntegerType))
   .withColumn("day", substring(col("date"), 7, 2).cast(IntegerType))
@@ -72,7 +93,7 @@ sc
   .write
   .mode("overwrite")
   .partitionBy("year", "month", "day")
-  .parquet("/mnt/group09/attack.parquet")
+  .parquet("/mnt/group09/attack-yoy.parquet")
 
 // COMMAND ----------
 
@@ -85,4 +106,6 @@ display(
   .groupBy(col("trafficType"))
   .agg(sum("count").alias("max_count"))
   .orderBy(desc("max_count"))
+  .write
+  .parquet("blablablalba.parquet")
 )
