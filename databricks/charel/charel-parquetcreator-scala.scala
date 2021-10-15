@@ -66,13 +66,39 @@ sc
 
 // COMMAND ----------
 
+sc
+.textFile("/FileStore/group09/samples/cleansample.txt", 1)
+.flatMap(extractHours)
+.toDF()
+.where(col("hour") < 12)
+.write
+.partitionBy("hour")
+.mode("overwrite")
+.parquet("/mnt/group09/test.parquet")
+
+sc
+.textFile("/FileStore/group09/samples/cleansample.txt", 1)
+.flatMap(extractHours)
+.toDF()
+.where(col("hour") >= 12)
+.write
+.partitionBy("hour")
+.mode("append")
+.parquet("/mnt/group09/test.parquet")
+
+// COMMAND ----------
+
+spark.read.parquet("/mnt/group09/test.parquet")
+
+// COMMAND ----------
+
 // MAGIC %sh
 // MAGIC ls -lhS /dbfs/mnt/group09
 
 // COMMAND ----------
 
 // MAGIC %sh
-// MAGIC ls -lhS /dbfs/mnt/group09/pageviews-20190907-user.parquet
+// MAGIC ls -lhS /dbfs/mnt/group09/test.parquet
 
 // COMMAND ----------
 

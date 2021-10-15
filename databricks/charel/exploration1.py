@@ -29,6 +29,10 @@ query = df.groupby("hour").sum("count").orderBy(asc("hour"))
 
 # COMMAND ----------
 
+query.cache()
+
+# COMMAND ----------
+
 query.show()
 
 # COMMAND ----------
