@@ -10,7 +10,7 @@
 import pandas as pd
 import bz2
 
-from pyspark.sql.session import SparkSession
+#from pyspark.sql.session import SparkSession
 
 # COMMAND ----------
 
@@ -62,7 +62,10 @@ def fastreader(input_file, output_file, maxlines = 10 * 1000 * 1000 * 1000):
                 print(f"lines read: {i//1000000}M")
 
             # split line into list of words
-            wordlist = line.split(" ")
+            wordlist = line.strip().split(" ")
+            if len(wordlist) < 5:
+                print(line)
+                continue
             if len(wordlist) == 5:
                 # the case where we do not have an ID
                 wordlist.insert(2, "null")
@@ -114,18 +117,18 @@ def fastreader(input_file, output_file, maxlines = 10 * 1000 * 1000 * 1000):
 
 # COMMAND ----------
 
-spark = SparkSession \
-  .builder \
-  .getOrCreate()
+fastreader("./pageviews-20180131-user.bz2", "pageviews-test.parquet")
 
-download_links = [
-  ("/dbfs/mnt/lsde/wikimedia/pageview_complete/2018/2018-01/pageviews-20180131-user.bz2", "/dbfs/mnt/group09/pageviews-test.parquet")
-]
-
-rdd = spark.sparkContext.parallelize(download_links)
-df = rdd.map(lambda args: fastreader(args[0], args[1])).toDF()
-df.groupby(df[0]).sum().show()
-
-# COMMAND ----------
-
-
+# spark = SparkSession \
+#   .builder \
+#   .getOrCreate()
+# 
+# download_links = [
+#   ("/dbfs/mnt/lsde/wikimedia/pageview_complete/2018/2018-01/pageviews-20180131-user.bz2", "/dbfs/mnt/group09/pageviews-test.parquet")
+# ]
+# 
+# rdd = spark.sparkContext.parallelize(download_links)
+# df = rdd.map(lambda args: fastreader(args[0], args[1])).toDF()
+# df.groupby(df[0]).sum().show()
+# 
+# # COMMAND ----------
