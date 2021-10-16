@@ -29,6 +29,8 @@ def main():
         f.write(json.dumps(file_metadata))
         f.close()
 
+    return
+
     # Complete dataset size
     files = json.loads(open("sizes.json").read())
     total_size = sum([file['size'] for file in files])
