@@ -133,3 +133,7 @@ dmypy.json
 
 # settings
 settings.json
+
+# data
+/data/big/*
+/data/temp/*
