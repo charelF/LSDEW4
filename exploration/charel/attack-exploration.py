@@ -1,5 +1,11 @@
 # Databricks notebook source
-from pyspark.sql.functions import col, count, desc, asc, countDistinct
+from pyspark.sql.functions import col, count, desc, asc, countDistinct, to_date, to_timestamp
+from pyspark.sql.functions import year, month, dayofmonth
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls -lhS /dbfs/mnt/group09
 
 # COMMAND ----------
 
@@ -79,6 +85,79 @@ titlequery.count()
 
 # display(titlequery)
 titlequery.write.option("header", "true").csv("/mnt/group09/temp_c.csv")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## new pageviews delta
+
+# COMMAND ----------
+
+df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
+
+# COMMAND ----------
+
+import datetime
+
+# COMMAND ----------
+
+maxts = df.agg({"timestamp": "max"}).first()[0]
+mints = df.agg({"timestamp": "min"}).first()[0]
+
+# COMMAND ----------
+
+print(datetime.datetime.fromtimestamp(maxts))
+print(datetime.datetime.fromtimestamp(mints))
+
+# COMMAND ----------
+
+views_per_hour = df.groupby("timestamp")\
+.sum("count").withColumnRenamed("sum(count)", "sumCount").orderBy(asc("timestamp"))\
+.withColumn("date", to_timestamp(col("timestamp")))
+
+# COMMAND ----------
+
+unique_dates = views_per_hour.select(
+    year("date").alias('year'), 
+    month("date").alias('month'), 
+    dayofmonth("date").alias('day')
+)
+
+# COMMAND ----------
+
+display(unique_dates)
+
+# COMMAND ----------
+
+views_per_hour.write.csv("/mnt/group09/temp_c4.csv")
+
+# COMMAND ----------
+
+display(spark.read.csv("/mnt/group09/temp_c4.csv"))
+
+# COMMAND ----------
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# COMMAND ----------
+
+df = views_per_hour.toDF("timestamp", "sumCount").toPandas()
+type(df)
+
+# COMMAND ----------
+
+df["date"] = pd.to_datetime(df["timestamp"], unit="s")
+
+plt.figure(figsize=(10,4))
+plt.plot(df["date"], df["sumCount"], alpha=0.5)
+plt.grid(which="both")
+plt.show()
+
+# COMMAND ----------
+
+
 
 # COMMAND ----------
 
