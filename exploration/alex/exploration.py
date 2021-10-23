@@ -1,5 +1,6 @@
 # Databricks notebook source
 from pyspark.sql.functions import col, count, desc, asc
+import datetime as dt
 
 # COMMAND ----------
 
@@ -13,7 +14,7 @@ from pyspark.sql.functions import col, count, desc, asc
 
 # COMMAND ----------
 
-df = spark.read.parquet("/mnt/group09/attack.parquet")
+df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
 
 # COMMAND ----------
 
@@ -21,21 +22,62 @@ df.show(10)
 
 # COMMAND ----------
 
-spark.read.parquet("/mnt/group09/attack.parquet").groupby(["day","month", "hour"]).sum("count").orderBy(asc("hour")).write.parquet("alexd.parquet")
+start = "04/09/2019"
+start_date = dt.datetime.strptime(start,"%d/%m/%Y")
+start_timestamp = int(dt.datetime.timestamp(start_date))
+
+end = "05/09/2019"
+end_date = dt.datetime.strptime(end,"%d/%m/%Y")
+end_timestamp = int(dt.datetime.timestamp(end_date))
+
+
+print(start_timestamp)
+print(end_timestamp)
+
+# COMMAND ----------
+
+spark.read.format("delta").load("/mnt/group09/pageviews.delta")\
+  .groupBy("title", "domain", "trafficType", "accessType", "timestamp")\
+  .sum("count")\
+  .withColumnRenamed("sum(count)", "CumCount")\
+  .orderBy(asc("timestamp"))\
+  .where((col("timestamp") > start_timestamp) & ((col("timestamp") < end_timestamp)))\
+  .write\
+  .parquet("/mnt/group09/A6_04-05.parquet")
 
 # COMMAND ----------
 
 # MAGIC %sh
-# MAGIC ls -lhS /dbfs/mnt/group09
+# MAGIC ls -lhS /dbfs/mnt/group09/
 
 # COMMAND ----------
 
-# spark.read.parquet("/mnt/group09/attack.parquet")
-#   .groupBy(col("trafficType"))
-#   .agg(sum("count").alias("max_count"))
-#   .orderBy(desc("max_count"))
-#   .write
-#   .parquet("a1.parquet")
+df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")\
+  .groupBy("domain", "trafficType", "accessType", "timestamp")\
+  .sum("count")\
+  .withColumnRenamed("sum(count)", "CumCount")\
+  .orderBy(asc("timestamp"))\
+  .where((col("timestamp") > start_timestamp) & ((col("timestamp") < end_timestamp)))
+
+# COMMAND ----------
+
+df.show(10)
+
+# COMMAND ----------
+
+spark.read.format("delta").load("/mnt/group09/pageviews.delta")\
+  .groupBy("title", "domain", "trafficType", "accessType", "timestamp")\
+  .sum("count")\
+  .withColumnRenamed("sum(count)", "CumCount")\
+  .orderBy(asc("timestamp"))\
+  .where((col("timestamp") > start_timestamp) & ((col("timestamp") < end_timestamp)))\
+  .write\
+  .parquet("/mnt/group09/A5.parquet")
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls -lhS /dbfs/mnt/group09/
 
 # COMMAND ----------
 
