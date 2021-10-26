@@ -1,6 +1,6 @@
 export default function Layout({ children }) {
   return (
-    <div className="container mx-auto max-w-6xl py-10">
+    <div className="container mx-auto max-w-7xl py-8">
       {children}
     </div>
   )

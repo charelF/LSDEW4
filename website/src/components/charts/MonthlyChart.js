@@ -10,7 +10,7 @@ export default function MonthlyChart({ data }) {
         data={data}
         margin={{
           top: 5,
-          right: 30,
+          right: 70,
           left: 20,
           bottom: 5,
         }}

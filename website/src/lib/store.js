@@ -13,16 +13,33 @@ const makeOptions = (ops) => ops.reduce(
 )
 
 const useStore = create(set => ({
-    trafficType: makeOptions(trafficTypeOptions),
-    accessType: makeOptions(accessTypeOptions),
-    domains: makeOptions(domainOptions),
-    toggleCheckbox: (groupName, option, newValue) => set(state => ({
+    //trafficType: makeOptions(trafficTypeOptions),
+    //accessType: makeOptions(accessTypeOptions),
+    //domains: makeOptions(domainOptions),
+
+    trafficType: {
+        spider: false,
+        user: true
+    },
+    accessType: {
+        web: true,
+        'mobile-app': false,
+        'mobile-dev': false,
+    },
+    domains: {
+        "All": false,
+        "en.wikipedia": true,
+        "de.wikipedia": false,
+    },
+
+    toggleCheckbox: (groupName, option) => set(state => ({
         ...state, 
         [groupName]: { 
             ...state[groupName], 
-            [option]: newValue
+            [option]: !state[groupName][option]
         }
     })),
+
     hour: 11,
     setHour: (newValue) => set(state => ({
         ...state,
