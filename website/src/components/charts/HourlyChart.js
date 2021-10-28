@@ -19,9 +19,12 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
     }
     return {
       id: date,
-      data: data[date][currentHour].map((val, idx) => ({ y: val.y, x: cumsums[idx]})),
+      data: data[date][currentHour].map((val, idx) => ({ y: val.y, x: cumsums[idx] })),
     }
   })
+
+
+  // sort on y
 
   console.log(chartData)
 
@@ -31,10 +34,11 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
     <ResponsiveLineCanvas
       width={900}
       height={400}
-      margin={{ top: 20, right: 20, bottom: 160, left: 80 }}
+      margin={{ top: 20, right: 20, bottom: 60, left: 80 }}
       animate={true}
+      type={"point"}
       data={chartData}
-      colors={{"scheme": "nivo"}}
+      colors={{ "scheme": "nivo" }}
       enablePoints={false}
       gridXValues={[0.1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]}
       gridYValues={[0, 10, 100, 1000, 10000, 100000, 1000000, 10000000]}
@@ -42,6 +46,7 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
         type: 'log',
         base: 10,
         max: 'auto',
+        min: 1,
       }}
       yScale={{
         type: 'symlog',
@@ -54,12 +59,39 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
       axisBottom={{
         tickValues: [0.1, 10, 100, 1000, 10000, 100000, 1000000, 10000000],
         legendOffset: -12,
+        legend: 'views',
       }}
       axisLeft={{
         tickValues: [0, 10, 100, 1000, 10000, 100000, 1000000, 10000000],
         legendOffset: 12,
       }}
       useMesh={true}
+      legends={[
+        {
+          anchor: 'bottom-right',
+          direction: 'column',
+          justify: false,
+          translateX: 100,
+          translateY: 0,
+          itemsSpacing: 0,
+          itemDirection: 'left-to-right',
+          itemWidth: 80,
+          itemHeight: 20,
+          itemOpacity: 0.75,
+          symbolSize: 12,
+          symbolShape: 'circle',
+          symbolBorderColor: 'rgba(0, 0, 0, .5)',
+          effects: [
+            {
+              on: 'hover',
+              style: {
+                itemBackground: 'rgba(0, 0, 0, .03)',
+                itemOpacity: 1
+              }
+            }
+          ]
+        }
+      ]}
     />
 
   )
