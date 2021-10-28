@@ -59,10 +59,13 @@ const useStore = create(set => ({
     //    hourlyData: newData,
     //})),
 
-    monthlyData: [],
-    setMonthlyData: (newData) => set((state) => ({
+    monthlyData: {},
+    setMonthlyData: (monthYear, newData) => set((state) => ({
         ...state,
-        monthlyData: newData
+        monthlyData: {
+            ...state.monthlyData,
+            [monthYear]: newData
+        }
     })),
 }))
 
