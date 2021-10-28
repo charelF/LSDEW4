@@ -81,7 +81,7 @@ export default function Visualisation() {
       for (const accessType of selectedAccessTypes) {
         for (const domain of selectedDomain) {
           const fileName = encodedYearMonthDay + ".json"
-          console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
+          //console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
           const url = "/LSDE_2021_W4/data/hourly/" + [trafficType, accessType, domain, fileName].join("/")
 
           promises.push(fetch(url).then((response) => response.json()))
@@ -91,7 +91,7 @@ export default function Visualisation() {
 
     Promise.all(promises).then(responses => {
       var result = {}
-      console.log(responses)
+      //console.log(responses)
       for (const response of responses) {
         for (const hour in response) {
           if (!(hour in result)) {
@@ -102,7 +102,7 @@ export default function Visualisation() {
           result[hour] = [...result[hour], ...response[hour]]
         }
       }
-      console.log(result)
+      //console.log(result)
 
       for (const hour in Object.keys(result)) {
         result[hour] = result[hour].sort((x, y) => {
@@ -177,22 +177,24 @@ export default function Visualisation() {
 
   return (
     <>
-      <div className="flex">
-        <div className="flex flex-col w-4/5">
-          <div className="flex-1">
-            <div style={{ width: '100%', height: 400 }}>
-              <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
-            </div>
-          </div>
+      <div className="grid grid-cols-8 gap-10">
+        <div className="col-span-6">
+          <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
 
-          <div className="flex-1 mt-4">
-            <div style={{ width: '100%', height: 400 }}>
-              <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
-            </div>
+          <div className="mt-6">
+            <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
+            <p className="mt-4 text-xs text-justify mx-14">
+              The sorted distribution of page views. The x-axis represents the
+              pages and the y-axis shows the page views. The pages are sorted
+              according to their number of views, and their titles are left out as
+              the focus is on the distribution. The plot is log-log to highlight
+              the power law distribution - few pages have many views (top-left
+              corner) while many pages only have few views (bottom-right corner).
+            </p>
           </div>
         </div>
 
-        <div className="flex flex-col w-1/5">
+        <div className="col-span-2">
           <div className="mb-4">
             <span className="text-gray-700 font-medium">Year &amp; month</span>
 
