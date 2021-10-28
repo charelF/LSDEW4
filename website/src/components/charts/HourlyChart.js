@@ -3,7 +3,6 @@ import { ResponsiveLineCanvas } from "@nivo/line"
 export default function HourlyChart({ data, selectedDates, currentHour }) {
 
   if (!data || data.length === 0) {
-    console.log(data)
     return (
       <p>Loading data...</p>
     )
@@ -12,27 +11,40 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
   const chartData = selectedDates.filter(x => x in data).map((date) => {
     var cumsums = [];
     var cumsum = 0;
-    for (var i = 0; i < data[date][currentHour].length; i++) {
-      cumsum += data[date][currentHour][i].x;
-      cumsums.push(cumsum)
+    if (data[date][currentHour]) {
+      for (var i = 0; i < data[date][currentHour].length; i++) {
+        cumsum += data[date][currentHour][i].x;
+        cumsums.push(cumsum)
+      }
+      return {
+        id: date,
+        data: data[date][currentHour].map((val, idx) => ({ y: val.y, x: cumsums[idx] })),
+      }
     }
     return {
       id: date,
-      data: data[date][currentHour].map((val, idx) => ({ y: val.y, x: cumsums[idx] })),
+      data: []
     }
   })
 
+  const dataPointCount = chartData.map((lines) => lines.data.length).reduce((x, y) => x + y, 0)
+  if (dataPointCount === 0) {
+    return (
+      <p className="text-center my-40 font-medium">No available data.</p>
+    )
+  }
+
   return (
-    <div style={{ width: '100%', height: 400 }}>
+    <div style={{ width: '100%', height: 300 }}>
       <ResponsiveLineCanvas
-        margin={{ top: 10, bottom: 50, left: 60 }}
+        margin={{ top: 10, bottom: 50, left: 60, right: 30 }}
         animate={true}
         type={"point"}
         data={chartData}
         colors={{ "scheme": "nivo" }}
         enablePoints={false}
-        gridXValues={[0.1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]}
-        gridYValues={[0, 10, 100, 1000, 10000, 100000, 1000000, 10000000]}
+        gridXValues={[0.1, 10, 100, 1000, 10000, 100000, 1000000]}
+        gridYValues={[0, 10, 100, 1000, 10000, 100000, 1000000]}
         xScale={{
           type: 'log',
           base: 10,
@@ -45,15 +57,15 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
           max: 'auto',
           reverse: true,
           max: 0,
-          min: 10000000,
+          min: 100000,
         }}
         axisBottom={{
-          tickValues: [0.1, 10, 100, 1000, 10000, 100000, 1000000, 10000000],
+          tickValues: [0.1, 10, 100, 1000, 10000, 100000, 1000000],
           legendOffset: -12,
           legend: 'views',
         }}
         axisLeft={{
-          tickValues: [0, 10, 100, 1000, 10000, 100000, 1000000, 10000000],
+          tickValues: [0, 10, 100, 1000, 10000, 100000, 100000],
           legendOffset: 12,
         }}
         useMesh={true}

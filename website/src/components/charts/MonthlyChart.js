@@ -31,10 +31,17 @@ export default function MonthlyChart({ data, selectedMonths }) {
     data: data[monthYear].map((xy) => ({ ...xy, x: parseInt(xy.x.substring(8, 10)) * 100 + parseInt(xy.x.substring(11)) }))
   }))
 
+  const dataPointCount = chartData.map((lines) => lines.data.length).reduce((x, y) => x + y, 0)
+  if (dataPointCount === 0) {
+    return (
+      <p className="text-center my-60 font-medium">No available data.</p>
+    )
+  }
+
   return (
     <div style={{ width: '100%', height: 400 }}>
       <ResponsiveLineCanvas
-        margin={{ bottom: 50, left: 60 }}
+        margin={{ bottom: 50, left: 60, right: 30 }}
         colors={{ "scheme": "nivo" }}
         animate={true}
         data={chartData}

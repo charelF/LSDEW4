@@ -177,8 +177,8 @@ export default function Visualisation() {
 
   return (
     <>
-      <div className="grid grid-cols-8 gap-10">
-        <div className="col-span-6">
+      <div className="grid grid-cols-1 md:grid-cols-8 md:gap-10">
+        <div className="md:col-span-6">
           <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
 
           <div className="mt-6">
@@ -194,7 +194,7 @@ export default function Visualisation() {
           </div>
         </div>
 
-        <div className="col-span-2">
+        <div className="mt-10 md:mt-0 md:col-span-2">
           <div className="mb-4">
             <span className="text-gray-700 font-medium">Year &amp; month</span>
 
