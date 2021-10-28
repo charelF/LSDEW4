@@ -2,6 +2,10 @@ import { ResponsiveLine } from "@nivo/line"
 
 export default function HourlyChart({ data }) {
 
+    return (
+      <p>Loading data...</p>
+    )
+
   if (!data || data.length === 0) {
     return (
       <p>Loading data...</p>
@@ -12,8 +16,6 @@ export default function HourlyChart({ data }) {
   //for (var i = 0; i < data.length; i += Math.floor(data.length / 10)) {
   //  steps.push(data[i].x)
   //}
-
-  console.log("hourly data", data)
 
   return (
     <ResponsiveLine

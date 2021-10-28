@@ -19,14 +19,15 @@ export default function Visualisation() {
     fetch("/LSDE_2021_W4/data/hourly/user/desktop/en.wikipedia/2019-09-01.json")
       .then((response) => response.json())
       .then(data => {
-        console.log("got data", data)
+        //console.log("got data", data)
         setHourlyData(data)
       })
   }
 
   useEffect(() => {
+    fetchHourly(hour)
     fetchMonthly()
-  }, [state.trafficType, state.accessType, state.domains])
+  }, [state.trafficType, state.accessType, state.domains, hour])
 
   const selectedTypes = (checkboxType) => Object.entries(state[checkboxType]).filter((kv) => kv[1]).map((kv) => kv[0])
 
@@ -44,7 +45,7 @@ export default function Visualisation() {
         const checkedDomains = selectedDomain.includes("All") ? domainOptions : selectedDomain
         for (const domain of checkedDomains) {
           const url = "/LSDE_2021_W4/data/monthly/" + trafficType + "/" + accessType + "/" + domain + "/2019-09.json"
-          console.log("Fetching", url)
+          //console.log("Fetching", url)
           promises.push(fetch(url).then((response) => response.json()))
         }
       }
@@ -74,44 +75,35 @@ export default function Visualisation() {
         }
       })
 
-      console.log("new monthly ", newMonthlyData.length)
+      //console.log("new monthly ", newMonthlyData.length)
 
       setMonthlyData(newMonthlyData)
     })
 
-    //fetch("/LSDE_2021_W4/data/monthly/spider/desktop/en.wikipedia/2019-09.json")
-    //  .then((response) => response.json())
-    //  .then(data => {
-    //    const monthlyData = data.map((values) => ({
-    //      x: moment(values.x, "YYYY-MM-DD-HH").unix(),
-    //      y: values.y
-    //      //xs: values.xs
-    //      //xs: new Date(values.xs - 2 * 3600 * 1000)
-    //      //xs: moment.unix(values.xs / 1000).format("YYYY-MM-DD-HH")
-    //    }))
-    //    setMonthlyData(monthlyData)
-    //  })
+    // x: moment(values.x, "YYYY-MM-DD-HH").unix(),
+    // xs: new Date(values.xs - 2 * 3600 * 1000)
+    // xs: moment.unix(values.xs / 1000).format("YYYY-MM-DD-HH")
   }
 
-  useEffect(() => {
-    fetchHourly(hour)
-    fetchMonthly()
-  }, [])
+  const defaultMonths = [
+    "September 2019",
+  ]
+
+  const defaultDays = [
+    "1 September 2019"
+  ]
+
 
   const availableMonths = [
     "-",
-    "September 2019",
+    ...defaultMonths
   ]
 
   const availableDays = [
     "-",
-    "1 September 2019",
-    "2 September 2019",
-    "3 September 2019",
+    ...[...Array(30).keys()].map(x => (x + 1).toString() + " September 2019").filter(date => !defaultDays.includes(date))
   ]
 
-
-  //console.log("hourly data:", hourlyData)
 
   return (
     <>
@@ -134,13 +126,13 @@ export default function Visualisation() {
           <div className="mb-4">
             <span className="text-gray-700">Year &amp; month</span>
 
-            <Picker options={availableMonths} />
+            <Picker options={availableMonths} defaultOptions={defaultMonths} />
           </div>
 
           <div className="mb-4">
             <span className="text-gray-700">Days</span>
 
-            <Picker options={availableDays} />
+            <Picker options={availableDays} defaultOptions={defaultDays} />
           </div>
 
           <div className="my-4">
@@ -151,15 +143,9 @@ export default function Visualisation() {
             </div>
           </div>
 
-          <div>
-            <FormGroup groupName="trafficType" prettyName="Traffic type" options={trafficTypeOptions} />
-          </div>
-          <div>
-            <FormGroup groupName="accessType" prettyName="Access type" options={accessTypeOptions} />
-          </div>
-          <div>
-            <FormGroup groupName="domains" prettyName="Domain" options={domainOptions} />
-          </div>
+          <FormGroup groupName="trafficType" prettyName="Traffic type" options={trafficTypeOptions} />
+          <FormGroup groupName="accessType" prettyName="Access type" options={accessTypeOptions} />
+          <FormGroup groupName="domains" prettyName="Domain" options={domainOptions} />
         </div>
       </div>
     </>

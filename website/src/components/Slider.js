@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+// based on: https://codepen.io/seanstopnik/pen/CeLqA
+
 export default function Slider({ defaultValue, min, max, step, onChange }) {
     const [value, setValue] = useState(defaultValue)
     return (

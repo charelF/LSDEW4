@@ -2,7 +2,7 @@ import create from 'zustand'
 
 export const trafficTypeOptions = ["spider", "user"]
 export const accessTypeOptions = ["desktop", "mobile-app", "mobile-dev"]
-export const domainOptions = ["All", "en.wikipedia", "de.wikipedia", "fr.wikipedia", "es.wikipedia", "ru.wikipedia", "zh.wikipedia"]
+export const domainOptions = ["en.wikipedia", "de.wikipedia", "fr.wikipedia", "es.wikipedia", "ru.wikipedia", "zh.wikipedia"]
 
 const makeOptions = (ops) => ops.reduce(
     (options, option) => ({
@@ -31,6 +31,14 @@ const useStore = create(set => ({
         "en.wikipedia": true,
         "de.wikipedia": false,
     },
+
+    setCheckbox: (groupName, option, value) => set(state => ({
+        ...state,
+        [groupName]: {
+            ...state[groupName],
+            [option]: value
+        }
+    })),
 
     toggleCheckbox: (groupName, option) => set(state => ({
         ...state,

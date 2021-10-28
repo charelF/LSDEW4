@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import clsx from "clsx"
 
-export default function Picker({ options }) {
-  const [selectedOptions, setSelectedOptions] = useState([])
+export default function Picker({ options, defaultOptions = [] }) {
+  const [selectedOptions, setSelectedOptions] = useState(defaultOptions)
 
   return (
     <div>
@@ -31,7 +31,12 @@ export default function Picker({ options }) {
 
       <div className="pt-2 select-none">
         {selectedOptions.map((option, idx) => (
-          <div key={idx} className="text-xs inline-flex items-center font-bold leading-sm px-3 py-1 bg-indigo-200 text-indigo-700 rounded-full">
+          <div key={idx} className={clsx(
+            "inline-flex", "items-center",
+            "px-3", "py-1",
+            "text-xs", "font-bold", "leading-sm",
+            "bg-indigo-200", "text-indigo-700", "rounded-full"
+          )}>
             <span className="pr-1">
               {option}
             </span>

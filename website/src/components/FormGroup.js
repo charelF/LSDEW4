@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useStore from "../lib/store";
 
 function Checkbox({ label, isChecked, onCheckboxChange }) {
@@ -17,12 +18,26 @@ function Checkbox({ label, isChecked, onCheckboxChange }) {
 
 export default function FormGroup({ groupName, prettyName, options }) {
   const toggleCheckbox = useStore(state => state.toggleCheckbox)
+  const setCheckbox = useStore(state => state.setCheckbox)
   const localState = useStore(state => ({ ...state[groupName] }))
+
+  const [allChecked, setAllChecked] = useState(false)
 
   return (
     <div className="mb-4">
       <span className="text-gray-700">{prettyName}</span>
       <div className="mt-2">
+        <div>
+            <Checkbox
+              label="All"
+              isChecked={allChecked}
+              onCheckboxChange={(e) => options.map((option) => {
+                setCheckbox(groupName, option, !allChecked)
+                setAllChecked(!allChecked)
+              })}
+              key={groupName + "-all"}
+            />
+        </div>
         {options.map((option) => (
           <div>
             <Checkbox
