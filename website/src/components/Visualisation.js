@@ -176,60 +176,58 @@ export default function Visualisation() {
   const paddedHour = String(currentHour).padStart(2, '0')
 
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-8 md:gap-10">
-        <div className="md:col-span-6">
-          <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
+    <div className="grid grid-cols-1 md:grid-cols-8 md:gap-10 mx-6 md:mx-0">
+      <div className="md:col-span-6">
+        <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
 
-          <div className="mt-6">
-            <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
-            <p className="mt-4 text-xs text-justify mx-14">
-              The sorted distribution of page views. The x-axis represents the
-              pages and the y-axis shows the page views. The pages are sorted
-              according to their number of views, and their titles are left out as
-              the focus is on the distribution. The plot is log-log to highlight
-              the power law distribution - few pages have many views (top-left
-              corner) while many pages only have few views (bottom-right corner).
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-10 md:mt-0 md:col-span-2">
-          <div className="mb-4">
-            <span className="text-gray-700 font-medium">Year &amp; month</span>
-
-            <Picker
-              options={availableMonths}
-              defaultOptions={defaultMonths}
-              onChange={(newValues) => setSelectedMonths(newValues)}
-            />
-          </div>
-
-          <div className="mb-4">
-            <span className="text-gray-700 font-medium">Days</span>
-
-            <Picker
-              options={availableDays}
-              defaultOptions={defaultDays}
-              onChange={(newValues) => {
-                setSelectedDates(newValues)
-              }}
-            />
-          </div>
-
-          <div className="my-4">
-            <span className="text-gray-700 font-medium">Hour ({paddedHour}:00 - {paddedHour}:59)</span>
-
-            <div className="mx-2 my-2">
-              <Slider defaultValue={currentHour} min={0} max={23} step={1} onChange={(value) => setCurrentHour(value)} />
-            </div>
-          </div>
-
-          <FormGroup groupName="trafficType" prettyName="Traffic type" options={trafficTypeOptions} />
-          <FormGroup groupName="accessType" prettyName="Access type" options={accessTypeOptions} />
-          <FormGroup groupName="domains" prettyName="Domain" options={domainOptions} />
+        <div className="mt-6">
+          <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
+          <p className="mt-4 text-xs text-justify mx-14">
+            The sorted distribution of page views. The x-axis represents the
+            pages and the y-axis shows the page views. The pages are sorted
+            according to their number of views, and their titles are left out as
+            the focus is on the distribution. The plot is log-log to highlight
+            the power law distribution - few pages have many views (top-left
+            corner) while many pages only have few views (bottom-right corner).
+          </p>
         </div>
       </div>
-    </>
+
+      <div className="mt-10 md:mt-0 md:col-span-2">
+        <div className="mb-4">
+          <span className="text-gray-700 font-medium">Year &amp; month</span>
+
+          <Picker
+            options={availableMonths}
+            defaultOptions={defaultMonths}
+            onChange={(newValues) => setSelectedMonths(newValues)}
+          />
+        </div>
+
+        <div className="mb-4">
+          <span className="text-gray-700 font-medium">Days</span>
+
+          <Picker
+            options={availableDays}
+            defaultOptions={defaultDays}
+            onChange={(newValues) => {
+              setSelectedDates(newValues)
+            }}
+          />
+        </div>
+
+        <div className="my-4">
+          <span className="text-gray-700 font-medium">Hour ({paddedHour}:00 - {paddedHour}:59)</span>
+
+          <div className="mx-2 my-2">
+            <Slider defaultValue={currentHour} min={0} max={23} step={1} onChange={(value) => setCurrentHour(value)} />
+          </div>
+        </div>
+
+        <FormGroup groupName="trafficType" prettyName="Traffic type" options={trafficTypeOptions} />
+        <FormGroup groupName="accessType" prettyName="Access type" options={accessTypeOptions} />
+        <FormGroup groupName="domains" prettyName="Domain" options={domainOptions} />
+      </div>
+    </div>
   )
 }
