@@ -61,11 +61,12 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
         }}
         axisBottom={{
           tickValues: [0.1, 10, 100, 1000, 10000, 100000, 1000000],
+          legend: 'Page',
           legendOffset: -12,
-          legend: 'views',
         }}
         axisLeft={{
           tickValues: [0, 10, 100, 1000, 10000, 100000, 100000],
+          legend: "Total views",
           legendOffset: 12,
         }}
         useMesh={true}

@@ -21,8 +21,9 @@ export default function MonthlyChart({ data, selectedMonths }) {
 
   var steps = []
   if (data[maxMonth]) {
-    for (var i = 0; i < data[maxMonth].length; i += Math.floor(data[maxMonth].length / 4)) {
-      steps.push(parseInt(data[maxMonth][i].x.substring(8, 10)))
+    for (var i = 0; i < data[maxMonth].length; i += Math.floor(data[maxMonth].length / 8)) {
+      const dayHour = parseInt(data[maxMonth][i].x.substring(8, 10)) * 100
+      steps.push(dayHour)
     }
   }
 
@@ -39,7 +40,7 @@ export default function MonthlyChart({ data, selectedMonths }) {
   }
 
   return (
-    <div style={{ width: '100%', height: 400 }}>
+    <div style={{ width: '100%', height: 300 }}>
       <ResponsiveLineCanvas
         margin={{ bottom: 50, left: 60, right: 30 }}
         colors={{ "scheme": "nivo" }}
@@ -54,6 +55,7 @@ export default function MonthlyChart({ data, selectedMonths }) {
         }}
         axisBottom={{
           tickValues: steps,
+          format: (val) => "Day " + (val / 100).toString(),
           legend: "Day of the month",
           legendOffset: -12,
         }}
