@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import clsx from "clsx"
 
-export default function Picker({ options, defaultOptions = [], onChange }) {
+export default function Picker({ options, defaultOptions = [], onChange = () => { } }) {
   const [selectedOptions, setSelectedOptions] = useState(defaultOptions)
 
   return (
@@ -21,8 +21,8 @@ export default function Picker({ options, defaultOptions = [], onChange }) {
         )}
         onChange={(e) => {
           if (e.target.value !== "-") {
-            const newValues = [...selectedOptions, e.target.value] 
-            setSelectedOptions(newValues);
+            const newValues = [...selectedOptions, e.target.value]
+            setSelectedOptions(newValues)
             onChange(newValues)
           }
         }}
@@ -33,19 +33,26 @@ export default function Picker({ options, defaultOptions = [], onChange }) {
       </select>
 
       <div className="pt-2 select-none">
-        {selectedOptions.map((option, idx) => (
-          <div key={idx} className={clsx(
-            "inline-flex", "items-center",
-            "px-3", "py-1",
-            "text-xs", "font-bold", "leading-sm",
-            "bg-indigo-200", "text-indigo-700", "rounded-full"
-          )}>
-            <span className="pr-1">
-              {option}
-            </span>
-            <span className="cursor-pointer" onClick={() => setSelectedOptions(selectedOptions.filter(v => v !== option))}>
-              <X size={16} />
-            </span>
+        {selectedOptions.sort().map((option, idx) => (
+          <div>
+            <div key={idx} className={clsx(
+              "inline-flex",
+              "items-center",
+              "px-3", "py-1",
+              "text-xs", "font-bold", "leading-sm",
+              "bg-indigo-200", "text-indigo-700", "rounded-full"
+            )}>
+              <span className="pr-1">
+                {option}
+              </span>
+              <span className="cursor-pointer" onClick={() => {
+                const newValues = selectedOptions.filter(v => v !== option)
+                setSelectedOptions(newValues)
+                onChange(newValues)
+              }}>
+                <X size={16} />
+              </span>
+            </div>
           </div>
         ))}
       </div>

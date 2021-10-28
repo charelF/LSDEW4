@@ -16,48 +16,64 @@ export default function Visualisation() {
   const { monthlyData, setMonthlyData } = useStore(state => ({ monthlyData: state.monthlyData, setMonthlyData: state.setMonthlyData }))
 
   const defaultDays = [
-    "2019-09-01"
+    "2019-09-01",
+  ]
+
+  const defaultMonths = [
+    "2019-09",
   ]
 
   const [selectedDates, setSelectedDates] = useState(defaultDays)
-
-
-  const defaultMonths = [
-    "September 2019",
-  ]
-
+  const [selectedMonths, setSelectedMonths] = useState(defaultMonths)
 
   const availableMonths = [
     "-",
-    ...defaultMonths
+    "2018-09",
+    ...defaultMonths,
+    "2019-10",
   ]
 
   const availableDays = [
     "-",
+    ...defaultDays,
     ...[...Array(30).keys()].map(x => "2019-09-" + (x + 1).toString().padStart(2, "0")).filter(date => !defaultDays.includes(date))
   ]
 
-  useEffect(() => {
+  const selectedTypes = (checkboxType) => Object.entries(state[checkboxType]).filter((kv) => kv[1]).map((kv) => kv[0])
+
+  const updateMonthly = () => {
+    for (const d in selectedMonths) {
+      const selectedMonth = selectedMonths[d]
+      const year = parseInt(selectedMonth.substring(0, 4))
+      const month = parseInt(selectedMonth.substring(5, 7))
+      fetchMonthly(year, month)
+    }
+  }
+
+  const updateHourly = () => {
     for (const d in selectedDates) {
       const selectedDate = selectedDates[d]
-      console.log(selectedDate)
       const year = parseInt(selectedDate.substring(0, 4))
       const month = parseInt(selectedDate.substring(5, 7))
       const day = parseInt(selectedDate.substring(8, 10))
       fetchHourly(year, month, day)
     }
-    fetchMonthly(2019, 9)
-  }, [state.trafficType, state.accessType, state.domains, currentHour, selectedDates])
+  }
 
-  const selectedTypes = (checkboxType) => Object.entries(state[checkboxType]).filter((kv) => kv[1]).map((kv) => kv[0])
+  useEffect(() => {
+    updateHourly()
+  }, [state.trafficType, state.accessType, state.domains, currentHour, selectedDates, selectedMonths])
 
+  useEffect(() => {
+    updateMonthly()
+  }, [state.trafficType, state.accessType, state.domains, selectedMonths])
 
   const fetchHourly = (year, month, day) => {
     const paddedMonthDay = [month, day].map(x => x.toString().padStart(2, "0"))
     const encodedYearMonthDay = [year.toString(), ...paddedMonthDay].join("-")
     if (!(encodedYearMonthDay in hourlyData)) {
       const url = "/LSDE_2021_W4/data/hourly/user/desktop/en.wikipedia/" + encodedYearMonthDay + ".json"
-      console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
+      //console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
       fetch(url)
         .then((response) => response.json())
         .then(data => {
@@ -74,12 +90,14 @@ export default function Visualisation() {
     //console.log("Selected access types: ", selectedAccessTypes)
     //console.log("Selected domains: ", selectedDomain)
 
+    const encodedYearMonth = year.toString() + "-" + month.toString().padStart(2, "0")
+
     var promises = []
     for (const trafficType of selectedTrafficTypes) {
       for (const accessType of selectedAccessTypes) {
         const checkedDomains = selectedDomain.includes("All") ? domainOptions : selectedDomain
         for (const domain of checkedDomains) {
-          const fileName = year.toString() + "-" + month.toString().padStart(2, "0") + ".json"
+          const fileName = encodedYearMonth + ".json"
           const url = "/LSDE_2021_W4/data/monthly/" + [trafficType, accessType, domain, fileName].join("/")
           //console.log("Fetching", url)
           promises.push(fetch(url).then((response) => response.json()))
@@ -111,10 +129,11 @@ export default function Visualisation() {
         }
       })
 
-      setMonthlyData(newMonthlyData)
+      setMonthlyData(encodedYearMonth, newMonthlyData)
     })
   }
 
+  const paddedHour = String(currentHour).padStart(2, '0')
 
   return (
     <>
@@ -122,7 +141,7 @@ export default function Visualisation() {
         <div className="flex flex-col w-4/5">
           <div className="flex-1">
             <div style={{ width: '100%', height: 400 }}>
-              <MonthlyChart data={monthlyData} />
+              <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
             </div>
           </div>
 
@@ -135,13 +154,17 @@ export default function Visualisation() {
 
         <div className="flex flex-col w-1/5">
           <div className="mb-4">
-            <span className="text-gray-700">Year &amp; month</span>
+            <span className="text-gray-700 font-medium">Year &amp; month</span>
 
-            <Picker options={availableMonths} defaultOptions={defaultMonths} />
+            <Picker 
+              options={availableMonths}
+              defaultOptions={defaultMonths}
+              onChange={(newValues) => setSelectedMonths(newValues)}
+            />
           </div>
 
           <div className="mb-4">
-            <span className="text-gray-700">Days</span>
+            <span className="text-gray-700 font-medium">Days</span>
 
             <Picker
               options={availableDays}
@@ -153,7 +176,7 @@ export default function Visualisation() {
           </div>
 
           <div className="my-4">
-            <span className="text-gray-700">Hour ({String(currentHour).padStart(2, '0')}:00 - {String(currentHour).padStart(2, '0')}:59)</span>
+            <span className="text-gray-700 font-medium">Hour ({paddedHour}:00 - {paddedHour}:59)</span>
 
             <div className="mx-2 my-2">
               <Slider defaultValue={currentHour} min={0} max={23} step={1} onChange={(value) => setCurrentHour(value)} />

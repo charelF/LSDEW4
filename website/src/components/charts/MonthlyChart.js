@@ -4,7 +4,7 @@ import { ResponsiveLineCanvas } from '@nivo/line';
 
 import moment from 'moment';
 
-export default function MonthlyChart({ data }) {
+export default function MonthlyChart({ data, selectedMonths }) {
 
   if (data === null || data === undefined) {
     return (
@@ -25,21 +25,21 @@ export default function MonthlyChart({ data }) {
     labels.push(moment.unix(data[i].x).format("YYYY-MM-dd"))
   }
 
+  const chartData = selectedMonths.filter(x => x in data).map((monthYear) => ({
+    id: monthYear,
+    data: data[monthYear].map((xy) => ({ ...xy, x: parseInt(xy.x.substring(8, 10)) * 100 + parseInt(xy.x.substring(11)) }))
+  }))
+
   return (
     <ResponsiveLineCanvas
       width={900}
       height={400}
       margin={{ top: 20, right: 30, bottom: 60, left: 80 }}
+      colors={{ "scheme": "nivo" }}
       animate={true}
-      data={[
-        {
-          id: 'fake corp. A',
-          data,
-        },
-      ]}
+      data={chartData}
       enableSlices={'x'}
       gridXValues={steps}
-      colors={"#2563eb"}
       enablePoints={false}
       axisBottom={{
         tickValues: steps,

@@ -24,7 +24,7 @@ export default function FormGroup({ groupName, prettyName, options }) {
 
   return (
     <div className="mb-4">
-      <span className="text-gray-700">{prettyName}</span>
+      <span className="text-gray-700 font-medium">{prettyName}</span>
       <div className="mt-2">
         <div>
             <Checkbox

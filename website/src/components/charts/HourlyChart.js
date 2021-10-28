@@ -1,4 +1,3 @@
-import { ResponsiveLine } from "@nivo/line"
 import { ResponsiveLineCanvas } from "@nivo/line"
 
 export default function HourlyChart({ data, selectedDates, currentHour }) {
@@ -24,13 +23,9 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
   })
 
 
-  // sort on y
+  // TODO(gm): sort on y
 
-  console.log(chartData)
-
-  //return (<></>)
   return (
-    //<ResponsiveLine
     <ResponsiveLineCanvas
       width={900}
       height={400}
