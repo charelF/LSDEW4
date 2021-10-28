@@ -20,8 +20,8 @@ export default function Home() {
   ]
   return (
     <>
-      <h1 className="text-2xl">LSDE 2021: DDoS Detection (M4)</h1>
-      <ul className="my-4">
+      <h1 className="text-2xl font-medium">LSDE 2021: DDoS Detection (M4)</h1>
+      <ul className="my-8">
         {authors.map((author, idx) => (
           <li key={idx} className="inline px-4">
             <a href={author.link} className="text-indigo-400 hover:text-indigo-800">

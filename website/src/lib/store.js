@@ -1,8 +1,8 @@
 import create from 'zustand'
 
 export const trafficTypeOptions = ["spider", "user"]
-export const accessTypeOptions = ["web", "mobile-app", "mobile-dev"]
-export const domainOptions = ["All", "en.wikipedia", "de.wikipedia"]
+export const accessTypeOptions = ["desktop", "mobile-app", "mobile-dev"]
+export const domainOptions = ["All", "en.wikipedia", "de.wikipedia", "fr.wikipedia", "es.wikipedia", "ru.wikipedia", "zh.wikipedia"]
 
 const makeOptions = (ops) => ops.reduce(
     (options, option) => ({
@@ -22,7 +22,7 @@ const useStore = create(set => ({
         user: true
     },
     accessType: {
-        web: true,
+        desktop: true,
         'mobile-app': false,
         'mobile-dev': false,
     },
@@ -33,9 +33,9 @@ const useStore = create(set => ({
     },
 
     toggleCheckbox: (groupName, option) => set(state => ({
-        ...state, 
-        [groupName]: { 
-            ...state[groupName], 
+        ...state,
+        [groupName]: {
+            ...state[groupName],
             [option]: !state[groupName][option]
         }
     })),
@@ -46,16 +46,16 @@ const useStore = create(set => ({
         hour: newValue
     })),
 
-    hourlyData: {},
-    setHourlyData: (newData) => set(state => ({
+    hourlyData: [],
+    setHourlyData: (newData) => set((state) => ({
         ...state,
         hourlyData: newData,
     })),
 
-    monthlyData: {},
-    setMonthlyData: (newData) => set(state => ({
+    monthlyData: [],
+    setMonthlyData: (newData) => set((state) => ({
         ...state,
-        monthlyData: newData,
+        monthlyData: newData
     })),
 }))
 
