@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import useStore, { trafficTypeOptions, accessTypeOptions, domainOptions } from "../lib/store"
 
@@ -11,27 +11,61 @@ import Slider from "./Slider";
 
 export default function Visualisation() {
   const state = useStore()
-  const { hour, setHour } = useStore(state => ({ setHour: state.setHour, hour: state.hour }))
+  const { currentHour, setCurrentHour } = useStore(state => ({ currentHour: state.currentHour, setCurrentHour: state.setCurrentHour }))
   const { hourlyData, setHourlyData } = useStore(state => ({ hourlyData: state.hourlyData, setHourlyData: state.setHourlyData }))
   const { monthlyData, setMonthlyData } = useStore(state => ({ monthlyData: state.monthlyData, setMonthlyData: state.setMonthlyData }))
 
-  const fetchHourly = (hour) => {
-    fetch("/LSDE_2021_W4/data/hourly/user/desktop/en.wikipedia/2019-09-01.json")
-      .then((response) => response.json())
-      .then(data => {
-        //console.log("got data", data)
-        setHourlyData(data)
-      })
-  }
+  const [selectedDates, setSelectedDates] = useState([])
+
+
+  const defaultMonths = [
+    "September 2019",
+  ]
+
+  const defaultDays = [
+    "2019-09-01"
+  ]
+
+  const availableMonths = [
+    "-",
+    ...defaultMonths
+  ]
+
+  const availableDays = [
+    "-",
+    ...[...Array(30).keys()].map(x => "2019-09-" + (x + 1).toString().padStart(2, "0")).filter(date => !defaultDays.includes(date))
+  ]
 
   useEffect(() => {
-    fetchHourly(hour)
-    fetchMonthly()
-  }, [state.trafficType, state.accessType, state.domains, hour])
+    for (const d in selectedDates) {
+      const selectedDate = selectedDates[d]
+      console.log(selectedDate)
+      const year = parseInt(selectedDate.substring(0, 4))
+      const month = parseInt(selectedDate.substring(5, 7))
+      const day = parseInt(selectedDate.substring(8, 10))
+      fetchHourly(year, month, day)
+    }
+    fetchMonthly(2019, 9)
+  }, [state.trafficType, state.accessType, state.domains, currentHour, selectedDates])
 
   const selectedTypes = (checkboxType) => Object.entries(state[checkboxType]).filter((kv) => kv[1]).map((kv) => kv[0])
 
-  const fetchMonthly = (month) => {
+
+  const fetchHourly = (year, month, day) => {
+    const paddedMonthDay = [month, day].map(x => x.toString().padStart(2, "0"))
+    const encodedYearMonthDay = [year.toString(), ...paddedMonthDay].join("-")
+    if (!(encodedYearMonthDay in hourlyData)) {
+      const url = "/LSDE_2021_W4/data/hourly/user/desktop/en.wikipedia/" + encodedYearMonthDay + ".json"
+      console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
+      fetch(url)
+        .then((response) => response.json())
+        .then(data => {
+          setHourlyData(encodedYearMonthDay, data)
+        })
+    }
+  }
+
+  const fetchMonthly = (year, month) => {
     const selectedTrafficTypes = selectedTypes("trafficType")
     const selectedAccessTypes = selectedTypes("accessType")
     const selectedDomain = selectedTypes("domains")
@@ -44,7 +78,8 @@ export default function Visualisation() {
       for (const accessType of selectedAccessTypes) {
         const checkedDomains = selectedDomain.includes("All") ? domainOptions : selectedDomain
         for (const domain of checkedDomains) {
-          const url = "/LSDE_2021_W4/data/monthly/" + trafficType + "/" + accessType + "/" + domain + "/2019-09.json"
+          const fileName = year.toString() + "-" + month.toString().padStart(2, "0") + ".json"
+          const url = "/LSDE_2021_W4/data/monthly/" + [trafficType, accessType, domain, fileName].join("/")
           //console.log("Fetching", url)
           promises.push(fetch(url).then((response) => response.json()))
         }
@@ -64,7 +99,7 @@ export default function Visualisation() {
           }
         }
       }
-      //console.log("total result: ", Object.keys(result).length)
+
       const newMonthlyData = Object.entries(result).map((kv) => ({ x: kv[0], y: kv[1] })).sort((x, y) => {
         if (x.x < y.x) {
           return -1;
@@ -75,34 +110,9 @@ export default function Visualisation() {
         }
       })
 
-      //console.log("new monthly ", newMonthlyData.length)
-
       setMonthlyData(newMonthlyData)
     })
-
-    // x: moment(values.x, "YYYY-MM-DD-HH").unix(),
-    // xs: new Date(values.xs - 2 * 3600 * 1000)
-    // xs: moment.unix(values.xs / 1000).format("YYYY-MM-DD-HH")
   }
-
-  const defaultMonths = [
-    "September 2019",
-  ]
-
-  const defaultDays = [
-    "1 September 2019"
-  ]
-
-
-  const availableMonths = [
-    "-",
-    ...defaultMonths
-  ]
-
-  const availableDays = [
-    "-",
-    ...[...Array(30).keys()].map(x => (x + 1).toString() + " September 2019").filter(date => !defaultDays.includes(date))
-  ]
 
 
   return (
@@ -117,7 +127,7 @@ export default function Visualisation() {
 
           <div className="flex-1 mt-4">
             <div style={{ width: '100%', height: 400 }}>
-              <HourlyChart data={hourlyData[hour]} />
+              <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
             </div>
           </div>
         </div>
@@ -132,14 +142,20 @@ export default function Visualisation() {
           <div className="mb-4">
             <span className="text-gray-700">Days</span>
 
-            <Picker options={availableDays} defaultOptions={defaultDays} />
+            <Picker
+              options={availableDays}
+              defaultOptions={defaultDays}
+              onChange={(newValues) => {
+                setSelectedDates(newValues)
+              }}
+            />
           </div>
 
           <div className="my-4">
-            <span className="text-gray-700">Hour ({String(hour).padStart(2, '0')}:00 - {String(hour).padStart(2, '0')}:59)</span>
+            <span className="text-gray-700">Hour ({String(currentHour).padStart(2, '0')}:00 - {String(currentHour).padStart(2, '0')}:59)</span>
 
             <div className="mx-2 my-2">
-              <Slider defaultValue={hour} min={0} max={23} step={1} onChange={(value) => setHour(value)} />
+              <Slider defaultValue={currentHour} min={0} max={23} step={1} onChange={(value) => setCurrentHour(value)} />
             </div>
           </div>
 

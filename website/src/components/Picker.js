@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import clsx from "clsx"
 
-export default function Picker({ options, defaultOptions = [] }) {
+export default function Picker({ options, defaultOptions = [], onChange }) {
   const [selectedOptions, setSelectedOptions] = useState(defaultOptions)
 
   return (
@@ -20,8 +20,11 @@ export default function Picker({ options, defaultOptions = [] }) {
           "focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         )}
         onChange={(e) => {
-          if (e.target.value !== "-")
-            setSelectedOptions([...selectedOptions, e.target.value]);
+          if (e.target.value !== "-") {
+            const newValues = [...selectedOptions, e.target.value] 
+            setSelectedOptions(newValues);
+            onChange(newValues)
+          }
         }}
       >
         {options.filter(v => !selectedOptions.includes(v)).map((v, idx) => (

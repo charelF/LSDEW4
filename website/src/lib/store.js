@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 export const trafficTypeOptions = ["spider", "user"]
-export const accessTypeOptions = ["desktop", "mobile-app", "mobile-dev"]
+export const accessTypeOptions = ["desktop", "mobile-app", "mobile-web"]
 export const domainOptions = ["en.wikipedia", "de.wikipedia", "fr.wikipedia", "es.wikipedia", "ru.wikipedia", "zh.wikipedia"]
 
 const makeOptions = (ops) => ops.reduce(
@@ -13,23 +13,17 @@ const makeOptions = (ops) => ops.reduce(
 )
 
 const useStore = create(set => ({
-    //trafficType: makeOptions(trafficTypeOptions),
-    //accessType: makeOptions(accessTypeOptions),
-    //domains: makeOptions(domainOptions),
-
     trafficType: {
-        spider: false,
+        ...makeOptions(trafficTypeOptions),
         user: true
     },
     accessType: {
+        ...makeOptions(accessTypeOptions),
         desktop: true,
-        'mobile-app': false,
-        'mobile-dev': false,
     },
     domains: {
-        "All": false,
+        ...makeOptions(domainOptions),
         "en.wikipedia": true,
-        "de.wikipedia": false,
     },
 
     setCheckbox: (groupName, option, value) => set(state => ({
@@ -40,25 +34,30 @@ const useStore = create(set => ({
         }
     })),
 
-    toggleCheckbox: (groupName, option) => set(state => ({
+    currentHour: 11,
+    setCurrentHour: (newValue) => set(state => ({
         ...state,
-        [groupName]: {
-            ...state[groupName],
-            [option]: !state[groupName][option]
+        currentHour: newValue
+    })),
+
+    hourlyData: {},
+    setHourlyData: (hour, newData) => set((state) => ({
+        ...state,
+        hourlyData: {
+            ...state.hourlyData,
+            [hour]: newData
         }
     })),
 
-    hour: 11,
-    setHour: (newValue) => set(state => ({
-        ...state,
-        hour: newValue
-    })),
+    //removeHourlyData: (hour) => set((state) => ({
+    //    ...state,
+    //    hourlyData: 
+    //}))
 
-    hourlyData: [],
-    setHourlyData: (newData) => set((state) => ({
-        ...state,
-        hourlyData: newData,
-    })),
+    //setHourlyData: (newData) => set((state) => ({
+    //    ...state,
+    //    hourlyData: newData,
+    //})),
 
     monthlyData: [],
     setMonthlyData: (newData) => set((state) => ({
