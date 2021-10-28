@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ResponsiveLine } from "@nivo/line"
+import { ResponsiveLineCanvas } from '@nivo/line';
 
 import moment from 'moment';
 
@@ -26,7 +26,7 @@ export default function MonthlyChart({ data }) {
   }
 
   return (
-    <ResponsiveLine
+    <ResponsiveLineCanvas
       width={900}
       height={400}
       margin={{ top: 20, right: 30, bottom: 60, left: 80 }}

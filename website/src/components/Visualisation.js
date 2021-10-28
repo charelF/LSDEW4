@@ -15,16 +15,17 @@ export default function Visualisation() {
   const { hourlyData, setHourlyData } = useStore(state => ({ hourlyData: state.hourlyData, setHourlyData: state.setHourlyData }))
   const { monthlyData, setMonthlyData } = useStore(state => ({ monthlyData: state.monthlyData, setMonthlyData: state.setMonthlyData }))
 
-  const [selectedDates, setSelectedDates] = useState([])
+  const defaultDays = [
+    "2019-09-01"
+  ]
+
+  const [selectedDates, setSelectedDates] = useState(defaultDays)
 
 
   const defaultMonths = [
     "September 2019",
   ]
 
-  const defaultDays = [
-    "2019-09-01"
-  ]
 
   const availableMonths = [
     "-",
