@@ -43,7 +43,7 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
         data={chartData}
         colors={{ "scheme": "nivo" }}
         enablePoints={false}
-        gridXValues={[0.1, 10, 100, 1000, 10000, 100000, 1000000]}
+        gridXValues={[10, 100, 1000, 10000, 100000, 1000000]}
         gridYValues={[0, 10, 100, 1000, 10000, 100000, 1000000]}
         xScale={{
           type: 'log',
@@ -60,7 +60,7 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
           min: 100000,
         }}
         axisBottom={{
-          tickValues: [0.1, 10, 100, 1000, 10000, 100000, 1000000],
+          tickValues: [10, 100, 1000, 10000, 100000, 1000000],
           legend: 'Page',
           legendOffset: -12,
         }}
