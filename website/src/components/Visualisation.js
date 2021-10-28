@@ -29,8 +29,8 @@ export default function Visualisation() {
   const availableMonths = [
     "-",
     "2018-09",
+    "2019-08",
     ...defaultMonths,
-    "2019-10",
   ]
 
   const availableDays = [
