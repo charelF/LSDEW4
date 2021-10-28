@@ -71,15 +71,55 @@ export default function Visualisation() {
   const fetchHourly = (year, month, day) => {
     const paddedMonthDay = [month, day].map(x => x.toString().padStart(2, "0"))
     const encodedYearMonthDay = [year.toString(), ...paddedMonthDay].join("-")
-    if (!(encodedYearMonthDay in hourlyData)) {
-      const url = "/LSDE_2021_W4/data/hourly/user/desktop/en.wikipedia/" + encodedYearMonthDay + ".json"
-      //console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
-      fetch(url)
-        .then((response) => response.json())
-        .then(data => {
-          setHourlyData(encodedYearMonthDay, data)
-        })
+
+    const selectedTrafficTypes = selectedTypes("trafficType")
+    const selectedAccessTypes = selectedTypes("accessType")
+    const selectedDomain = selectedTypes("domains")
+
+    var promises = []
+    for (const trafficType of selectedTrafficTypes) {
+      for (const accessType of selectedAccessTypes) {
+        for (const domain of selectedDomain) {
+          const fileName = encodedYearMonthDay + ".json"
+          console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
+          const url = "/LSDE_2021_W4/data/hourly/" + [trafficType, accessType, domain, fileName].join("/")
+
+          promises.push(fetch(url).then((response) => response.json()))
+        }
+      }
     }
+
+    Promise.all(promises).then(responses => {
+      var result = {}
+      console.log(responses)
+      for (const response of responses) {
+        for (const hour in response) {
+          if (!(hour in result)) {
+            result[hour] = []
+          }
+        }
+        for (const hour in response) {
+          result[hour] = [...result[hour], ...response[hour]]
+        }
+      }
+      console.log(result)
+
+      for (const hour in Object.keys(result)) {
+        result[hour] = result[hour].sort((x, y) => {
+          if (x.y < y.y) {
+            return 1;
+          } else if (x.y > y.y) {
+            return -1;
+          } else {
+            return 0;
+          }
+
+        })
+      }
+
+      setHourlyData(encodedYearMonthDay, result)
+    })
+
   }
 
   const fetchMonthly = (year, month) => {
@@ -156,7 +196,7 @@ export default function Visualisation() {
           <div className="mb-4">
             <span className="text-gray-700 font-medium">Year &amp; month</span>
 
-            <Picker 
+            <Picker
               options={availableMonths}
               defaultOptions={defaultMonths}
               onChange={(newValues) => setSelectedMonths(newValues)}
