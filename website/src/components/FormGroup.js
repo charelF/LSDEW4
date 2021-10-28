@@ -17,7 +17,6 @@ function Checkbox({ label, isChecked, onCheckboxChange }) {
 }
 
 export default function FormGroup({ groupName, prettyName, options }) {
-  const toggleCheckbox = useStore(state => state.toggleCheckbox)
   const setCheckbox = useStore(state => state.setCheckbox)
   const localState = useStore(state => ({ ...state[groupName] }))
 
@@ -43,7 +42,7 @@ export default function FormGroup({ groupName, prettyName, options }) {
             <Checkbox
               label={option}
               isChecked={localState[option]}
-              onCheckboxChange={(e) => toggleCheckbox(groupName, e.target.name)}
+              onCheckboxChange={(e) => setCheckbox(groupName, e.target.name, !localState[e.target.name])}
               key={groupName + "-" + option}
             />
           </div>

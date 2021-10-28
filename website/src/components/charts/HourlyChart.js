@@ -1,34 +1,29 @@
 import { ResponsiveLine } from "@nivo/line"
 
-export default function HourlyChart({ data }) {
-
-    return (
-      <p>Loading data...</p>
-    )
+export default function HourlyChart({ data, selectedDates, currentHour }) {
 
   if (!data || data.length === 0) {
+    console.log(data)
     return (
       <p>Loading data...</p>
     )
   }
 
-  //var steps = []
-  //for (var i = 0; i < data.length; i += Math.floor(data.length / 10)) {
-  //  steps.push(data[i].x)
-  //}
+  const chartData = selectedDates.filter(x => x in data).map((date) => ({
+    id: date,
+    data: data[date][currentHour],
+  }))
 
+  console.log(chartData)
+
+  //return (<></>)
   return (
     <ResponsiveLine
       width={900}
       height={400}
       margin={{ top: 20, right: 20, bottom: 60, left: 80 }}
       animate={true}
-      data={[
-        {
-          id: 'fake corp. A',
-          data,
-        },
-      ]}
+      data={chartData}
       colors={"#2563eb"}
       enablePoints={false}
       gridYValues={[10, 100, 1000, 10000, 100000, 1000000, 10000000]}
