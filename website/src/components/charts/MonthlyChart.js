@@ -1,6 +1,20 @@
 import React from 'react';
 
 import { ResponsiveLineCanvas } from '@nivo/line';
+import moment from 'moment';
+
+import { BasicTooltip } from "@nivo/tooltip"
+
+function MonthlyTooltip({ point: { color, data: { date, y }}}) {
+  return (
+    <BasicTooltip
+      id={date}
+      value={y}
+      color={color}
+      enableChip
+    />
+  );
+}
 
 export default function MonthlyChart({ data, selectedMonths }) {
 
@@ -29,8 +43,14 @@ export default function MonthlyChart({ data, selectedMonths }) {
 
   const chartData = selectedMonths.filter(x => x in data).map((monthYear) => ({
     id: monthYear,
-    data: data[monthYear].map((xy) => ({ ...xy, x: parseInt(xy.x.substring(8, 10)) * 100 + parseInt(xy.x.substring(11)) }))
+    data: data[monthYear].map((xy) => ({
+      ...xy,
+      date: moment(xy.x, "YYYY-MM-DD-HH").format("YYYY-MM-DD HH:00"),
+      x: parseInt(xy.x.substring(8, 10)) * 100 + parseInt(xy.x.substring(11)),
+    }))
   }))
+
+  console.log(chartData)
 
   const dataPointCount = chartData.map((lines) => lines.data.length).reduce((x, y) => x + y, 0)
   if (dataPointCount === 0) {
@@ -61,6 +81,8 @@ export default function MonthlyChart({ data, selectedMonths }) {
         }}
         useMesh={true}
         enableSlices={false}
+        crosshairType={"x"}
+        tooltip={MonthlyTooltip}
         legends={[
           {
             anchor: 'bottom',

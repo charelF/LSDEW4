@@ -1,5 +1,18 @@
 import { ResponsiveLineCanvas } from "@nivo/line"
 
+import { BasicTooltip } from "@nivo/tooltip"
+
+function HourlyTooltip({ point: { color, data: { x, y }}}) {
+  return (
+    <BasicTooltip
+      id={"Page #" + x.toString()}
+      value={y}
+      color={color}
+      enableChip
+    />
+  );
+}
+
 export default function HourlyChart({ data, selectedDates, currentHour }) {
 
   if (!data || data.length === 0) {
@@ -69,6 +82,7 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
           legend: "Total views",
           legendOffset: 12,
         }}
+        tooltip={HourlyTooltip}
         useMesh={true}
         legends={[
           {

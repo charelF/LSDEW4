@@ -9,7 +9,7 @@ export default function Picker({ options, defaultOptions = [], onChange = () => 
 
   return (
     <div>
-      <select selected="-" className={
+      <select value={"-"} className={
         clsx(
           "block",
           "w-full",
