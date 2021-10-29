@@ -76,6 +76,8 @@ export default function HourlyChart({ data, selectedDates, currentHour }) {
           tickValues: [10, 100, 1000, 10000, 100000, 1000000],
           legend: 'Page',
           legendOffset: -12,
+          min: 0,
+          max: 10000000,
         }}
         axisLeft={{
           tickValues: [0, 10, 100, 1000, 10000, 100000, 100000],

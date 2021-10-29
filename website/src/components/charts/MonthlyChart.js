@@ -50,8 +50,6 @@ export default function MonthlyChart({ data, selectedMonths }) {
     }))
   }))
 
-  console.log(chartData)
-
   const dataPointCount = chartData.map((lines) => lines.data.length).reduce((x, y) => x + y, 0)
   if (dataPointCount === 0) {
     return (
@@ -62,7 +60,7 @@ export default function MonthlyChart({ data, selectedMonths }) {
   return (
     <div style={{ width: '100%', height: 300 }}>
       <ResponsiveLineCanvas
-        margin={{ bottom: 50, left: 60, right: 30 }}
+        margin={{ top: 10, bottom: 50, left: 60, right: 30 }}
         colors={{ "scheme": "nivo" }}
         animate={true}
         data={chartData}
