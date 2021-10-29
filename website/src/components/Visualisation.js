@@ -7,6 +7,7 @@ import HourlyChart from "./charts/HourlyChart";
 import FormGroup from "../components/FormGroup";
 import Picker from "./Picker";
 import Slider from "./Slider";
+import moment from "moment";
 
 
 export default function Visualisation() {
@@ -36,7 +37,14 @@ export default function Visualisation() {
   const availableDays = [
     "-",
     ...defaultDays,
-    ...[...Array(30).keys()].map(x => "2019-09-" + (x + 1).toString().padStart(2, "0")).filter(date => !defaultDays.includes(date))
+    ...selectedMonths.map((yearMonth) => ({
+      prefix: yearMonth,
+      daysInMonth: moment(yearMonth, "YYYY-MM").daysInMonth()
+    })).map((yearMonthDays) => [
+      ...[...Array(yearMonthDays.daysInMonth).keys()].map(
+        day => yearMonthDays.prefix + "-" + (day + 1).toString().padStart(2, "0")
+      )
+    ]).flatMap(x => x),
   ]
 
   const selectedTypes = (checkboxType) => Object.entries(state[checkboxType]).filter((kv) => kv[1]).map((kv) => kv[0])
