@@ -20,7 +20,7 @@ export default function FormGroup({ groupName, prettyName, options }) {
   const setCheckbox = useStore(state => state.setCheckbox)
   const localState = useStore(state => ({ ...state[groupName] }))
 
-  const [allChecked, setAllChecked] = useState(false)
+  const allChecked = Object.values(localState).reduce((x, y) => x && y, true)
 
   return (
     <div className="mb-4">
@@ -32,7 +32,6 @@ export default function FormGroup({ groupName, prettyName, options }) {
               isChecked={allChecked}
               onCheckboxChange={(e) => options.map((option) => {
                 setCheckbox(groupName, option, !allChecked)
-                setAllChecked(!allChecked)
               })}
               key={groupName + "-all"}
             />

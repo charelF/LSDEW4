@@ -9,7 +9,7 @@ export default function Picker({ options, defaultOptions = [], onChange = () => 
 
   return (
     <div>
-      <select selected="-" className={
+      <select value={"-"} className={
         clsx(
           "block",
           "w-full",
@@ -34,8 +34,8 @@ export default function Picker({ options, defaultOptions = [], onChange = () => 
 
       <div className="pt-2 select-none">
         {selectedOptions.sort().map((option, idx) => (
-          <div>
-            <div key={idx} className={clsx(
+          <div key={idx}>
+            <div className={clsx(
               "inline-flex",
               "items-center",
               "px-3", "py-1",

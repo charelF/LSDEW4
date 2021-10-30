@@ -49,16 +49,6 @@ const useStore = create(set => ({
         }
     })),
 
-    //removeHourlyData: (hour) => set((state) => ({
-    //    ...state,
-    //    hourlyData: 
-    //}))
-
-    //setHourlyData: (newData) => set((state) => ({
-    //    ...state,
-    //    hourlyData: newData,
-    //})),
-
     monthlyData: {},
     setMonthlyData: (monthYear, newData) => set((state) => ({
         ...state,

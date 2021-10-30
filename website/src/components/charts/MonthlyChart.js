@@ -1,8 +1,20 @@
 import React from 'react';
 
 import { ResponsiveLineCanvas } from '@nivo/line';
-
 import moment from 'moment';
+
+import { BasicTooltip } from "@nivo/tooltip"
+
+function MonthlyTooltip({ point: { color, data: { date, y }}}) {
+  return (
+    <BasicTooltip
+      id={date}
+      value={y}
+      color={color}
+      enableChip
+    />
+  );
+}
 
 export default function MonthlyChart({ data, selectedMonths }) {
 
@@ -18,36 +30,74 @@ export default function MonthlyChart({ data, selectedMonths }) {
     )
   }
 
+  const lengths = Object.values(data).map(x => x.length)
+  const maxMonth = Object.keys(data)[lengths.indexOf(Math.max(...lengths))]
+
   var steps = []
-  var labels = []
-  for (var i = 0; i < data.length; i += Math.floor(data.length / 8)) {
-    steps.push(data[i].x)
-    labels.push(moment.unix(data[i].x).format("YYYY-MM-dd"))
+  if (data[maxMonth]) {
+    for (var i = 0; i < data[maxMonth].length; i += Math.floor(data[maxMonth].length / 8)) {
+      const dayHour = parseInt(data[maxMonth][i].x.substring(8, 10)) * 100
+      steps.push(dayHour)
+    }
   }
 
   const chartData = selectedMonths.filter(x => x in data).map((monthYear) => ({
     id: monthYear,
-    data: data[monthYear].map((xy) => ({ ...xy, x: parseInt(xy.x.substring(8, 10)) * 100 + parseInt(xy.x.substring(11)) }))
+    data: data[monthYear].map((xy) => ({
+      ...xy,
+      date: moment(xy.x, "YYYY-MM-DD-HH").format("YYYY-MM-DD HH:00"),
+      x: parseInt(xy.x.substring(8, 10)) * 100 + parseInt(xy.x.substring(11)),
+    }))
   }))
 
-  return (
-    <ResponsiveLineCanvas
-      width={900}
-      height={400}
-      margin={{ top: 20, right: 30, bottom: 60, left: 80 }}
-      colors={{ "scheme": "nivo" }}
-      animate={true}
-      data={chartData}
-      enableSlices={'x'}
-      gridXValues={steps}
-      enablePoints={false}
-      axisBottom={{
-        tickValues: steps,
-        legendOffset: -12,
-      }}
-      useMesh={true}
-      enableSlices={false}
-    />
+  const dataPointCount = chartData.map((lines) => lines.data.length).reduce((x, y) => x + y, 0)
+  if (dataPointCount === 0) {
+    return (
+      <p className="text-center my-60 font-medium">No available data.</p>
+    )
+  }
 
+  return (
+    <div style={{ width: '100%', height: 300 }}>
+      <ResponsiveLineCanvas
+        margin={{ top: 10, bottom: 50, left: 60, right: 30 }}
+        colors={{ "scheme": "nivo" }}
+        animate={true}
+        data={chartData}
+        enableSlices={'x'}
+        gridXValues={steps}
+        enablePoints={false}
+        axisLeft={{
+          legend: "Total views",
+          legendOffset: 12
+        }}
+        axisBottom={{
+          tickValues: steps,
+          format: (val) => "Day " + (val / 100).toString(),
+          legend: "Day of the month",
+          legendOffset: -12,
+        }}
+        useMesh={true}
+        enableSlices={false}
+        crosshairType={"x"}
+        tooltip={MonthlyTooltip}
+        legends={[
+          {
+            anchor: 'bottom',
+            direction: 'row',
+            justify: false,
+            translateY: 50,
+            itemsSpacing: 0,
+            itemDirection: 'left-to-right',
+            itemWidth: 80,
+            itemHeight: 20,
+            itemOpacity: 0.75,
+            symbolSize: 12,
+            symbolShape: 'circle',
+            symbolBorderColor: 'rgba(0, 0, 0, .5)',
+          }
+        ]}
+      />
+    </div>
   )
 }

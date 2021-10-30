@@ -7,6 +7,7 @@ import HourlyChart from "./charts/HourlyChart";
 import FormGroup from "../components/FormGroup";
 import Picker from "./Picker";
 import Slider from "./Slider";
+import moment from "moment";
 
 
 export default function Visualisation() {
@@ -29,14 +30,21 @@ export default function Visualisation() {
   const availableMonths = [
     "-",
     "2018-09",
+    "2019-08",
     ...defaultMonths,
-    "2019-10",
   ]
 
   const availableDays = [
     "-",
     ...defaultDays,
-    ...[...Array(30).keys()].map(x => "2019-09-" + (x + 1).toString().padStart(2, "0")).filter(date => !defaultDays.includes(date))
+    ...selectedMonths.map((yearMonth) => ({
+      prefix: yearMonth,
+      daysInMonth: moment(yearMonth, "YYYY-MM").daysInMonth()
+    })).map((yearMonthDays) => [
+      ...[...Array(yearMonthDays.daysInMonth).keys()].map(
+        day => yearMonthDays.prefix + "-" + (day + 1).toString().padStart(2, "0")
+      )
+    ]).flatMap(x => x),
   ]
 
   const selectedTypes = (checkboxType) => Object.entries(state[checkboxType]).filter((kv) => kv[1]).map((kv) => kv[0])
@@ -71,15 +79,55 @@ export default function Visualisation() {
   const fetchHourly = (year, month, day) => {
     const paddedMonthDay = [month, day].map(x => x.toString().padStart(2, "0"))
     const encodedYearMonthDay = [year.toString(), ...paddedMonthDay].join("-")
-    if (!(encodedYearMonthDay in hourlyData)) {
-      const url = "/LSDE_2021_W4/data/hourly/user/desktop/en.wikipedia/" + encodedYearMonthDay + ".json"
-      //console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
-      fetch(url)
-        .then((response) => response.json())
-        .then(data => {
-          setHourlyData(encodedYearMonthDay, data)
-        })
+
+    const selectedTrafficTypes = selectedTypes("trafficType")
+    const selectedAccessTypes = selectedTypes("accessType")
+    const selectedDomain = selectedTypes("domains")
+
+    var promises = []
+    for (const trafficType of selectedTrafficTypes) {
+      for (const accessType of selectedAccessTypes) {
+        for (const domain of selectedDomain) {
+          const fileName = encodedYearMonthDay + ".json"
+          //console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
+          const url = "/LSDE_2021_W4/data/hourly/" + [trafficType, accessType, domain, fileName].join("/")
+
+          promises.push(fetch(url).then((response) => response.json()))
+        }
+      }
     }
+
+    Promise.all(promises).then(responses => {
+      var result = {}
+      //console.log(responses)
+      for (const response of responses) {
+        for (const hour in response) {
+          if (!(hour in result)) {
+            result[hour] = []
+          }
+        }
+        for (const hour in response) {
+          result[hour] = [...result[hour], ...response[hour]]
+        }
+      }
+      //console.log(result)
+
+      for (const hour in Object.keys(result)) {
+        result[hour] = result[hour].sort((x, y) => {
+          if (x.y < y.y) {
+            return 1;
+          } else if (x.y > y.y) {
+            return -1;
+          } else {
+            return 0;
+          }
+
+        })
+      }
+
+      setHourlyData(encodedYearMonthDay, result)
+    })
+
   }
 
   const fetchMonthly = (year, month) => {
@@ -136,58 +184,58 @@ export default function Visualisation() {
   const paddedHour = String(currentHour).padStart(2, '0')
 
   return (
-    <>
-      <div className="flex">
-        <div className="flex flex-col w-4/5">
-          <div className="flex-1">
-            <div style={{ width: '100%', height: 400 }}>
-              <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
-            </div>
-          </div>
+    <div className="grid grid-cols-1 md:grid-cols-8 md:gap-10 mx-6 md:mx-0">
+      <div className="md:col-span-6">
+        <MonthlyChart data={monthlyData} selectedMonths={selectedMonths} />
 
-          <div className="flex-1 mt-4">
-            <div style={{ width: '100%', height: 400 }}>
-              <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col w-1/5">
-          <div className="mb-4">
-            <span className="text-gray-700 font-medium">Year &amp; month</span>
-
-            <Picker 
-              options={availableMonths}
-              defaultOptions={defaultMonths}
-              onChange={(newValues) => setSelectedMonths(newValues)}
-            />
-          </div>
-
-          <div className="mb-4">
-            <span className="text-gray-700 font-medium">Days</span>
-
-            <Picker
-              options={availableDays}
-              defaultOptions={defaultDays}
-              onChange={(newValues) => {
-                setSelectedDates(newValues)
-              }}
-            />
-          </div>
-
-          <div className="my-4">
-            <span className="text-gray-700 font-medium">Hour ({paddedHour}:00 - {paddedHour}:59)</span>
-
-            <div className="mx-2 my-2">
-              <Slider defaultValue={currentHour} min={0} max={23} step={1} onChange={(value) => setCurrentHour(value)} />
-            </div>
-          </div>
-
-          <FormGroup groupName="trafficType" prettyName="Traffic type" options={trafficTypeOptions} />
-          <FormGroup groupName="accessType" prettyName="Access type" options={accessTypeOptions} />
-          <FormGroup groupName="domains" prettyName="Domain" options={domainOptions} />
+        <div className="mt-6">
+          <HourlyChart data={hourlyData} selectedDates={selectedDates} currentHour={currentHour} />
+          <p className="mt-4 text-xs text-justify mx-14">
+            The sorted distribution of page views. The x-axis represents the
+            pages and the y-axis shows the page views. The pages are sorted
+            according to their number of views, and their titles are left out as
+            the focus is on the distribution. The plot is log-log to highlight
+            the power law distribution - few pages have many views (top-left
+            corner) while many pages only have few views (bottom-right corner).
+          </p>
         </div>
       </div>
-    </>
+
+      <div className="mt-10 md:mt-0 md:col-span-2">
+        <div className="mb-4">
+          <span className="text-gray-700 font-medium">Year &amp; month</span>
+
+          <Picker
+            options={availableMonths}
+            defaultOptions={defaultMonths}
+            onChange={(newValues) => setSelectedMonths(newValues)}
+          />
+        </div>
+
+        <div className="mb-4">
+          <span className="text-gray-700 font-medium">Days</span>
+
+          <Picker
+            options={availableDays}
+            defaultOptions={defaultDays}
+            onChange={(newValues) => {
+              setSelectedDates(newValues)
+            }}
+          />
+        </div>
+
+        <div className="my-4">
+          <span className="text-gray-700 font-medium">Hour ({paddedHour}:00 - {paddedHour}:59)</span>
+
+          <div className="mx-2 my-2">
+            <Slider defaultValue={currentHour} min={0} max={23} step={1} onChange={(value) => setCurrentHour(value)} />
+          </div>
+        </div>
+
+        <FormGroup groupName="trafficType" prettyName="Traffic type" options={trafficTypeOptions} />
+        <FormGroup groupName="accessType" prettyName="Access type" options={accessTypeOptions} />
+        <FormGroup groupName="domains" prettyName="Domain" options={domainOptions} />
+      </div>
+    </div>
   )
 }
