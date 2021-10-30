@@ -11,7 +11,7 @@ import pyspark.sql.functions as f
 
 # COMMAND ----------
 
-year("1567551600").alias('year')
+df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
 
 # COMMAND ----------
 
@@ -31,14 +31,38 @@ def datamaker(loc, ts, dom, tt, at):
 
 # COMMAND ----------
 
-d1 = int(datetime.datetime.timestamp(datetime.datetime(2019, 9, 1, 0, 0, 0)))
-d2 = int(datetime.datetime.timestamp(datetime.datetime(2019, 10, 1, 0, 0, 0)))
+
+
+# COMMAND ----------
+
+#d1 = int(datetime.datetime.timestamp(datetime.datetime(2019, 9, 1, 0, 0, 0)))
+#d2 = int(datetime.datetime.timestamp(datetime.datetime(2019, 10, 1, 0, 0, 0)))
+d1 = int(datetime.datetime.timestamp(datetime.datetime(2019, 8, 1, 0, 0, 0)))
+d2 = int(datetime.datetime.timestamp(datetime.datetime(2019, 9, 1, 0, 0, 0)))
+#d2 = int(datetime.datetime.timestamp(datetime.datetime(2019, 9, 2, 0, 0, 0)))
 interesting_domains = ["en.wikipedia", "de.wikipedia", "fr.wikipedia", "es.wikipedia", "ru.wikipedia", "zh.wikipedia"]
 
-query = df.where((col("timestamp") > d1) & (col("timestamp") < d2))\
+#query = df.where((col("timestamp") > d1) & (col("timestamp") < d2))\
+#.where(col("domain").isin(interesting_domains))\
+#.select(["timestamp", "domain", "trafficType", "accessType", "count"])\
+#.distinct()
+
+query = df.where((col("timestamp") >= d1) & (col("timestamp") < d2))\
 .where(col("domain").isin(interesting_domains))\
-.select(["timestamp", "domain", "trafficType", "accessType"])\
-.distinct()
+.withColumnRenamed("count", "y")\
+.groupby(["timestamp", "domain", "trafficType", "accessType", "y"])\
+.count()\
+.withColumnRenamed("count", "x")\
+.write.mode("overwrite").parquet("/mnt/group09/websitedata123/aug2019.parquet")
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls -lR /dbfs/mnt/group09/websitedata123
+
+# COMMAND ----------
+
+display(spark.read.parquet("/mnt/group09/websitedata123/test/test.parquet"))
 
 # COMMAND ----------
 
@@ -94,6 +118,43 @@ datetime.datetime.fromtimestamp(1569405600).strftime("")
 # COMMAND ----------
 
 dfsmall.groupBy(col("count")).sum().orderBy(desc("count")).show()#
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Monthly Data
+
+# COMMAND ----------
+
+df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
+
+# COMMAND ----------
+
+d1 = int(datetime.datetime.timestamp(datetime.datetime(2019, 8, 1, 0, 0, 0)))
+d2 = int(datetime.datetime.timestamp(datetime.datetime(2019, 9, 1, 0, 0, 0)))
+interesting_domains = ["en.wikipedia", "de.wikipedia", "fr.wikipedia", "es.wikipedia", "ru.wikipedia", "zh.wikipedia"]
+
+query = df.where((col("timestamp") >= d1) & (col("timestamp") < d2))\
+.where(col("domain").isin(interesting_domains))\
+.groupby(["timestamp", "domain", "trafficType", "accessType"]).sum("count").withColumnRenamed("sum(count)", "sumcount")
+
+# COMMAND ----------
+
+query.repartition(10).write.mode("overwrite").parquet("/mnt/group09/websitedatamonthly/aug2019.parquet")
+
+# COMMAND ----------
+
+2 * 3 * 6 * 31 * 24
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls -ld /dbfs/mnt/group09/website/hourly/*/*/*/*.csv | wc -l
+
+# COMMAND ----------
+
+# MAGIC %sh
+# MAGIC ls -lR /dbfs/mnt/group09/pageviews.delta
 
 # COMMAND ----------
 
