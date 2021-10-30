@@ -112,6 +112,19 @@ val paths = (2021 to 2021).flatMap(
 // COMMAND ----------
 
 val df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
+df
+  .withColumn("year", from_unixtime(col("timestamp"), "yyyy"))
+  .withColumn("month", from_unixtime(col("timestamp"), "MM"))
+  .withColumn("day", from_unixtime(col("timestamp"), "dd"))
+  .select("year", "month", "day")
+  
+  .distinct()
+.count()
+//  .printSchema()
+
+// COMMAND ----------
+
+val df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
 val uniqueDomains = df.filter(select("domain").distinct()
 uniqueDomains.cache()
 uniqueDomains.count()
