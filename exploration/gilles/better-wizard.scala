@@ -188,7 +188,3 @@ def datamaker(timestamp: Long, domain: String, trafficType: String, accessType: 
 
 val sample = Row(1568419200, "zh.wikipedia", "user", "mobile-web", "2019", "09", "14", "00")
 datamaker(1568419200, "zh.wikipedia", "user", "mobile-web", "2019", "09", "14", "00")
-
-// COMMAND ----------
-
-

@@ -29,15 +29,13 @@ def main():
         f.write(json.dumps(file_metadata))
         f.close()
 
-    return
-
     # Complete dataset size
     files = json.loads(open("sizes.json").read())
     total_size = sum([file['size'] for file in files])
 
     print(f"Total size:               {total_size // (2**30)} GiB")
     total_size = 0
-    ranges = [f"pageview_complete/20{n}" for n in range(15, 22)]
+    ranges = [f"pageview_complete/20{n}" for n in range(18, 22)]
     for file in files:
         for r in ranges:
             if r in file['file']:
