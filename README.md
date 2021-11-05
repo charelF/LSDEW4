@@ -2,9 +2,15 @@
 
 ## Initial Task
 
+From the [LSDE Course Page](https://event.cwi.nl/lsde/2021/practical2_projects.shtml#M4):
+
 > Wikipedia publishes [hourly page view statistics](https://dumps.wikimedia.org/other/pageview_complete/readme.html) for their projects. This data is available in this shape from 2015 onwards. The popularity of topics in Wikipedia can give an indication of the interest of people over time and space (the latter, specifically in non-english language domains).
 
 > **W4: DDOS Detection.** Find Distributed Denial Of Service (DDOS) attacks to Wikipedia. This should include devising criteria to distinguish DDOS attacks from trending topics. Summarize these attacks over time and cluster them by theme
+
+## Our work
+
+We investigated various sources of pageviews data. We then downloaded it to our AWS S3 cluster and ran queries on it to extract interesting findings. We present our findings in the final report and on the visualisation website
 
 ## Visualisation
 
