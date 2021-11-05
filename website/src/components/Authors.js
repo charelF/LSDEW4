@@ -1,21 +1,26 @@
+import { prefix } from "../lib/prefix"
+
 export default function Authors() {
   const authors = [
     {
       name: "Aleksander Janczewski",
       link: "https://www.linkedin.com/in/aleksander-janczewski/",
-      image: "/LSDE_2021_W4/authors/alex.jpeg"
+      image: "/authors/alex.jpeg"
     },
     {
       name: "Gilles Magalhaes",
       link: "https://www.linkedin.com/in/gilles-magalhaes-ribeiro/",
-      image: "/LSDE_2021_W4/authors/gilles.jpeg"
+      image: "/authors/gilles.jpeg"
     },
     {
       name: "Charel Felten",
       link: "https://www.linkedin.com/in/charel-felten/",
-      image: "/LSDE_2021_W4/authors/charel.jpeg"
+      image: "/authors/charel.jpeg"
     }
-  ]
+  ].map(author => ({
+    ...author,
+    image: prefix + author.image
+  }))
 
   return (
     <ul className="my-8">

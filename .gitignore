@@ -132,3 +132,7 @@ dmypy.json
 
 # settings
 settings.json
+
+.ipynb_checkpoints
+
+submission_group09.tar.gz

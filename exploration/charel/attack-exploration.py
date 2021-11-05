@@ -1,16 +1,20 @@
 # Databricks notebook source
-from pyspark.sql.functions import col, count, desc, asc, countDistinct, to_date, to_timestamp
-from pyspark.sql.functions import year, month, dayofmonth
 
 # COMMAND ----------
 
 # MAGIC %sh
-# MAGIC ls -lhS /dbfs/mnt/group09
+# MAGIC pip install requests
 
 # COMMAND ----------
 
-# MAGIC %sh
-# MAGIC ls -lhS /dbfs/mnt/group09/attack-yoy.parquet
+from pyspark.sql.functions import col, asc, to_timestamp, year, month, dayofmonth
+
+import requests
+import datetime
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 # COMMAND ----------
 
@@ -24,12 +28,12 @@ df = spark.read.parquet("/mnt/group09/attack-yoy.parquet")
 # COMMAND ----------
 
 query = df\
-.groupby("year", "month", "day", "hour")\
-.sum("count")\
-.withColumnRenamed("sum(count)", "sumCount")\
-.withColumn("date", col("hour") + col("day")*100 + col("month")*100*100 + col("year")*100*100*100)\
-.select(["date", "sumCount"])\
-.orderBy(asc("date"))
+    .groupby("year", "month", "day", "hour")\
+    .sum("count")\
+    .withColumnRenamed("sum(count)", "sumCount")\
+    .withColumn("date", col("hour") + col("day")*100 + col("month")*100*100 + col("year")*100*100*100)\
+    .select(["date", "sumCount"])\
+    .orderBy(asc("date"))
 
 # COMMAND ----------
 
@@ -42,19 +46,13 @@ display(query)
 
 # COMMAND ----------
 
-testquery = df\
-.where(col("day") = 8)
-.where(col("pageID")== 133264)\
-.show(100)
+testquery = df \
+    .where(col("day") == 8) \
+    .where(col("pageID")== 133264) \
+    .show(100)
 
 # COMMAND ----------
 
-# MAGIC %sh
-# MAGIC pip install requests
-
-# COMMAND ----------
-
-import requests
 def wikidata_qid_to_titles(qid):
     url = f"https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
     titles = []
@@ -74,8 +72,7 @@ dos_ddos_titles
 
 # COMMAND ----------
 
-titlequery = df\
-.where(col("title").isin(dos_ddos_titles))
+titlequery = df.where(col("title").isin(dos_ddos_titles))
 
 # COMMAND ----------
 
@@ -83,7 +80,6 @@ titlequery.count()
 
 # COMMAND ----------
 
-# display(titlequery)
 titlequery.write.option("header", "true").csv("/mnt/group09/temp_c.csv")
 
 # COMMAND ----------
@@ -97,10 +93,6 @@ df = spark.read.format("delta").load("/mnt/group09/pageviews.delta")
 
 # COMMAND ----------
 
-import datetime
-
-# COMMAND ----------
-
 maxts = df.agg({"timestamp": "max"}).first()[0]
 mints = df.agg({"timestamp": "min"}).first()[0]
 
@@ -111,9 +103,10 @@ print(datetime.datetime.fromtimestamp(mints))
 
 # COMMAND ----------
 
-views_per_hour = df.groupby("timestamp")\
-.sum("count").withColumnRenamed("sum(count)", "sumCount").orderBy(asc("timestamp"))\
-.withColumn("date", to_timestamp(col("timestamp")))
+views_per_hour = df\
+    .groupby("timestamp")\
+    .sum("count").withColumnRenamed("sum(count)", "sumCount").orderBy(asc("timestamp"))\
+    .withColumn("date", to_timestamp(col("timestamp")))
 
 # COMMAND ----------
 
@@ -137,12 +130,6 @@ display(spark.read.csv("/mnt/group09/temp_c4.csv"))
 
 # COMMAND ----------
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-# COMMAND ----------
-
 df = views_per_hour.toDF("timestamp", "sumCount").toPandas()
 type(df)
 
@@ -154,11 +141,3 @@ plt.figure(figsize=(10,4))
 plt.plot(df["date"], df["sumCount"], alpha=0.5)
 plt.grid(which="both")
 plt.show()
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
