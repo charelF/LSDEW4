@@ -11,6 +11,7 @@ VU LSDE 2021 - Assignment 2 - Project W4 - DDOS Detection
 
 | Directory          | Description                                                                                      |
 | ------------------ | ------------------------------------------------------------------------------------------------ |
+| report.pdf         | Report related to this project                                                                   |
 | data               | Generated datasets used for analysis and website                                                 |
 | exploration        | Development scripts grouped by team member                                                       |
 | img                | Generated images for the report                                                                  |

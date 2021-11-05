@@ -4,7 +4,7 @@ clean:
 	rm -fr ../submission
 	rm -fr submission_group09.tar.gz
 
-submission:
+submission: report.pdf
 	cp -r ../project ../submission
 	rm -fr  ../submission/website/.next ../submission/website/node_modules
 	cd ../submission && git clean -f -X
