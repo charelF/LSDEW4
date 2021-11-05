@@ -9,6 +9,8 @@
 
 ## Visualisation
 
+We made a website for the visualisation, which can be found at [cfx.lu/lsde](https://cfx.lu/lsde).
+
 ![screenshot of the website](img/website_nicer.png)
 
 ## Repository structure
