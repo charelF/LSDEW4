@@ -9,11 +9,11 @@ VU LSDE 2021 - Assignment 2 - Project W4 - DDOS Detection
 
 ## Repository structure
 
-| Directory   | Description                                                                                      |
-| ----------- | ------------------------------------------------------------------------------------------------ |
-| data        | Generated datasets used for analysis and website                                                 |
-| exploration | Development scripts grouped by team member                                                       |
-| img         | Generated images for the report                                                                  |
-| notes       | Notes about the investigated datasets                                                            |
-| pipeline    | Data pipeline source code used for collection, preparation (cleaning), analysis and data product |
-| website     | Source code for website                                                                          |
+| Directory          | Description                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------ |
+| data               | Generated datasets used for analysis and website                                                 |
+| exploration        | Development scripts grouped by team member                                                       |
+| img                | Generated images for the report                                                                  |
+| notes              | Notes about the investigated datasets                                                            |
+| pipeline           | Data pipeline source code used for collection, preparation (cleaning), analysis and data product |
+| website            | Source code for website                                                                          |
