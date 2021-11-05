@@ -5,6 +5,7 @@ import useStore, { trafficTypeOptions, accessTypeOptions, domainOptions } from "
 import MonthlyChart from './charts/MonthlyChart';
 import HourlyChart from "./charts/HourlyChart";
 import FormGroup from "../components/FormGroup";
+import { prefix } from "../lib/prefix";
 import Picker from "./Picker";
 import Slider from "./Slider";
 import moment from "moment";
@@ -89,8 +90,7 @@ export default function Visualisation() {
       for (const accessType of selectedAccessTypes) {
         for (const domain of selectedDomain) {
           const fileName = encodedYearMonthDay + ".json"
-          //console.log("Fetching hourly data for", encodedYearMonthDay, ":", url)
-          const url = "/LSDE_2021_W4/data/hourly/" + [trafficType, accessType, domain, fileName].join("/")
+          const url = prefix + "/data/hourly/" + [trafficType, accessType, domain, fileName].join("/")
 
           promises.push(fetch(url).then((response) => response.json()))
         }
@@ -99,7 +99,6 @@ export default function Visualisation() {
 
     Promise.all(promises).then(responses => {
       var result = {}
-      //console.log(responses)
       for (const response of responses) {
         for (const hour in response) {
           if (!(hour in result)) {
@@ -110,7 +109,6 @@ export default function Visualisation() {
           result[hour] = [...result[hour], ...response[hour]]
         }
       }
-      //console.log(result)
 
       for (const hour in Object.keys(result)) {
         result[hour] = result[hour].sort((x, y) => {
@@ -134,9 +132,6 @@ export default function Visualisation() {
     const selectedTrafficTypes = selectedTypes("trafficType")
     const selectedAccessTypes = selectedTypes("accessType")
     const selectedDomain = selectedTypes("domains")
-    //console.log("Selected traffic types: ", selectedTrafficTypes)
-    //console.log("Selected access types: ", selectedAccessTypes)
-    //console.log("Selected domains: ", selectedDomain)
 
     const encodedYearMonth = year.toString() + "-" + month.toString().padStart(2, "0")
 
@@ -146,8 +141,7 @@ export default function Visualisation() {
         const checkedDomains = selectedDomain.includes("All") ? domainOptions : selectedDomain
         for (const domain of checkedDomains) {
           const fileName = encodedYearMonth + ".json"
-          const url = "/LSDE_2021_W4/data/monthly/" + [trafficType, accessType, domain, fileName].join("/")
-          //console.log("Fetching", url)
+          const url = prefix + "/data/monthly/" + [trafficType, accessType, domain, fileName].join("/")
           promises.push(fetch(url).then((response) => response.json()))
         }
       }
