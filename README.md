@@ -10,7 +10,7 @@ From the [LSDE Course Page](https://event.cwi.nl/lsde/2021/practical2_projects.s
 
 ## Our work
 
-We investigated various sources of pageviews data. We then downloaded it to our AWS S3 cluster and ran queries on it to extract interesting findings. We present our findings in the final report and on the visualisation website
+We investigated various sources of pageviews data. We then downloaded it to our AWS S3 cluster and ran queries on it using a Spark with Databricks running on an EC2 instance. We ran queries and aggregated results, then downloaded them locally to further investigate with Numpy and Pandas and visualise with Matplotlib. We present our findings in the final report and on the visualisation website
 
 ## Visualisation
 
